@@ -9,10 +9,10 @@ inclusion: always
 |---|---|
 | Bahasa | PHP 8.3+ |
 | Framework | Laravel 12 |
-| Panel Admin | Filament 3 |
-| Interaktivitas | Livewire 3 + Alpine.js |
+| Panel Admin | Filament 5 |
+| Interaktivitas | Livewire 4 + Alpine.js |
 | Styling | Tailwind CSS |
-| Database | MySQL 8 (produksi) / SQLite (dev) |
+| Database | MySQL 8  |
 | Build aset | Vite |
 | Chart | Chart.js |
 | Queue | Laravel Queue (notifikasi WhatsApp) |
@@ -21,7 +21,7 @@ inclusion: always
 ## Paket yang direkomendasikan
 - `filament/filament` — panel admin.
 - `spatie/laravel-activitylog` — audit log perubahan (akuntabilitas).
-- `spatie/laravel-permission` — hak akses granular (opsional, pengganti tabel `roles` sederhana).
+- `spatie/laravel-permission` — hak akses granular.
 - `pestphp/pest` — testing.
 - `laravel/pint` — formatter (PSR-12).
 - `larastan/larastan` — analisis statis.
