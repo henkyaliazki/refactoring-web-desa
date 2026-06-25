@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transparansi APBDes — Desa Jatirokeh</title>
+  <meta name="description" content="Transparansi Anggaran Pendapatan dan Belanja Desa (APBDes) Jatirokeh. Pendapatan, belanja, realisasi, dan dokumen resmi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { brand: { 50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b' },
+        sand: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',400:'#fbbf24',500:'#f59e0b',600:'#d97706' } },
+      fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] } } } }
+  </script>
+  <style>.glass{backdrop-filter:blur(10px)}</style>
+</head>
+<body class="font-sans text-slate-700 bg-slate-50 antialiased">
+
+  <!-- TOP BAR -->
+  <div class="bg-brand-900 text-brand-100 text-xs">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+      <span class="hidden sm:flex items-center gap-1.5">Kec. Songgom, Kab. Brebes, Jawa Tengah</span>
+      <a href="layanan.html" class="hover:text-white font-semibold text-sand-200">Lapor / Aduan</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header x-data="{ open:false }" class="sticky top-0 z-50 bg-white shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white shadow-lg shadow-brand-600/30">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+          </div>
+          <div class="leading-tight">
+            <p class="font-extrabold text-slate-900 text-[15px]">DESA JATIROKEH</p>
+            <p class="text-[11px] text-slate-500 -mt-0.5">Kecamatan Songgom · Brebes</p>
+          </div>
+        </a>
+        <div class="hidden lg:flex items-center gap-1">
+          <a href="index.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Beranda</a>
+          <a href="profil.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Profil</a>
+          <a href="transparansi.html" class="px-3 py-2 text-sm font-semibold text-brand-700 rounded-lg">Transparansi</a>
+          <a href="berita.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Berita</a>
+          <a href="potensi.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Potensi</a>
+          <a href="kontak.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Kontak</a>
+          <a href="layanan.html" class="ml-2 px-4 py-2.5 text-sm font-semibold text-white bg-brand-700 hover:bg-brand-800 rounded-lg shadow-lg shadow-brand-600/25 transition">Layanan Surat</a>
+        </div>
+        <button @click="open=!open" class="lg:hidden p-2 text-slate-700">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="open" x-transition class="lg:hidden border-t border-slate-100 bg-white" style="display:none">
+      <div class="px-4 py-3 space-y-1">
+        <a href="index.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Beranda</a>
+        <a href="profil.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Profil Desa</a>
+        <a href="transparansi.html" class="block px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-700 bg-brand-50">Transparansi APBDes</a>
+        <a href="berita.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Berita</a>
+        <a href="potensi.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Potensi Desa</a>
+        <a href="kontak.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Kontak</a>
+        <a href="layanan.html" class="block px-3 py-2.5 rounded-lg text-sm font-semibold text-white bg-brand-700 text-center mt-2">Layanan Surat Online</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="bg-gradient-to-br from-brand-800 to-brand-900 relative overflow-hidden">
+    <div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-brand-700/30 blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-4 py-12 lg:py-16">
+      <nav class="text-xs text-brand-200 mb-3 flex items-center gap-2">
+        <a href="index.html" class="hover:text-white">Beranda</a> <span>/</span> <span class="text-white">Transparansi APBDes</span>
+      </nav>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">Transparansi APBDes</h1>
+      <p class="text-brand-100/80 mt-3 max-w-2xl">Anggaran Pendapatan dan Belanja Desa Jatirokeh yang kami buka untuk publik sesuai amanat Permendagri No. 20 Tahun 2018. Setiap warga berhak mengetahui dan mengawasi.</p>
+    </div>
+  </section>
+
+  <main x-data="{ year:'2025' }" class="max-w-7xl mx-auto px-4 py-10 lg:py-14">
+
+    <!-- YEAR SELECTOR + DOWNLOAD -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+      <div class="flex items-center gap-2 bg-white rounded-xl border border-slate-200 p-1.5 shadow-sm">
+        <span class="text-xs font-semibold text-slate-400 px-2">Tahun Anggaran:</span>
+        <template x-for="y in ['2025','2024','2023']">
+          <button @click="year=y" :class="year===y ? 'bg-brand-700 text-white shadow' : 'text-slate-600 hover:bg-slate-100'" class="px-4 py-1.5 rounded-lg text-sm font-semibold transition" x-text="y"></button>
+        </template>
+      </div>
+      <a href="#" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-sand-500 hover:bg-sand-600 text-white font-semibold text-sm shadow-lg shadow-sand-500/30 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Unduh Perdes APBDes <span x-text="year"></span> (PDF)
+      </a>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+      <div class="bg-white rounded-2xl border border-slate-100 p-6 relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-24 h-24 bg-brand-50 rounded-full -mr-8 -mt-8"></div>
+        <div class="relative">
+          <div class="flex items-center gap-2 text-brand-700 mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/></svg>
+            <span class="text-sm font-semibold">Pendapatan</span>
+          </div>
+          <p class="text-3xl font-extrabold text-slate-900">Rp 2,84 <span class="text-lg">M</span></p>
+          <p class="text-xs text-slate-400 mt-1">Total anggaran pendapatan desa</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-100 p-6 relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-24 h-24 bg-sand-50 rounded-full -mr-8 -mt-8"></div>
+        <div class="relative">
+          <div class="flex items-center gap-2 text-sand-600 mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9M18 7l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            <span class="text-sm font-semibold">Belanja</span>
+          </div>
+          <p class="text-3xl font-extrabold text-slate-900">Rp 2,79 <span class="text-lg">M</span></p>
+          <p class="text-xs text-slate-400 mt-1">Total anggaran belanja desa</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-100 p-6 relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-24 h-24 bg-slate-50 rounded-full -mr-8 -mt-8"></div>
+        <div class="relative">
+          <div class="flex items-center gap-2 text-slate-600 mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            <span class="text-sm font-semibold">Pembiayaan</span>
+          </div>
+          <p class="text-3xl font-extrabold text-slate-900">Rp 52 <span class="text-lg">Jt</span></p>
+          <p class="text-xs text-slate-400 mt-1">SiLPA tahun sebelumnya</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW -->
+    <div class="grid lg:grid-cols-2 gap-6 mb-10">
+      <div class="bg-white rounded-2xl border border-slate-100 p-6">
+        <h3 class="font-bold text-slate-900 mb-1">Sumber Pendapatan Desa</h3>
+        <p class="text-xs text-slate-400 mb-5">Komposisi pendapatan tahun anggaran 2025</p>
+        <canvas id="pendapatanChart" height="260"></canvas>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-100 p-6">
+        <h3 class="font-bold text-slate-900 mb-1">Belanja per Bidang</h3>
+        <p class="text-xs text-slate-400 mb-5">Alokasi belanja menurut bidang kewenangan</p>
+        <canvas id="belanjaChart" height="260"></canvas>
+      </div>
+    </div>
+
+    <!-- REALIZATION PROGRESS -->
+    <div class="bg-white rounded-2xl border border-slate-100 p-6 lg:p-8 mb-10">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h3 class="font-bold text-slate-900 text-lg">Realisasi Belanja per Bidang</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Perbandingan realisasi terhadap anggaran · per 12 Juni 2026</p>
+        </div>
+        <span class="hidden sm:inline-flex px-3 py-1.5 rounded-full bg-brand-50 text-brand-700 text-sm font-bold">Total 68%</span>
+      </div>
+      <div class="space-y-6">
+        <div>
+          <div class="flex items-center justify-between mb-2 text-sm">
+            <span class="font-semibold text-slate-700">Bidang Pembangunan</span>
+            <span class="text-slate-500">Rp 875 Jt / <span class="font-semibold text-slate-700">Rp 920 Jt</span></span>
+          </div>
+          <div class="h-3 rounded-full bg-slate-100 overflow-hidden"><div class="h-full rounded-full bg-brand-600" style="width:95%"></div></div>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-2 text-sm">
+            <span class="font-semibold text-slate-700">Bidang Pemberdayaan Masyarakat</span>
+            <span class="text-slate-500">Rp 312 Jt / <span class="font-semibold text-slate-700">Rp 480 Jt</span></span>
+          </div>
+          <div class="h-3 rounded-full bg-slate-100 overflow-hidden"><div class="h-full rounded-full bg-brand-500" style="width:65%"></div></div>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-2 text-sm">
+            <span class="font-semibold text-slate-700">Penyelenggaraan Pemerintahan</span>
+            <span class="text-slate-500">Rp 270 Jt / <span class="font-semibold text-slate-700">Rp 360 Jt</span></span>
+          </div>
+          <div class="h-3 rounded-full bg-slate-100 overflow-hidden"><div class="h-full rounded-full bg-sand-500" style="width:75%"></div></div>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-2 text-sm">
+            <span class="font-semibold text-slate-700">Pembinaan Kemasyarakatan</span>
+            <span class="text-slate-500">Rp 48 Jt / <span class="font-semibold text-slate-700">Rp 110 Jt</span></span>
+          </div>
+          <div class="h-3 rounded-full bg-slate-100 overflow-hidden"><div class="h-full rounded-full bg-brand-400" style="width:44%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL TABLE -->
+    <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden mb-10">
+      <div class="p-6 border-b border-slate-100">
+        <h3 class="font-bold text-slate-900 text-lg">Rincian Anggaran & Realisasi</h3>
+        <p class="text-xs text-slate-400 mt-0.5">Tahun Anggaran 2025</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-slate-50 text-left text-slate-500 text-xs uppercase tracking-wider">
+              <th class="px-6 py-3 font-semibold">Uraian Kegiatan</th>
+              <th class="px-6 py-3 font-semibold text-right">Anggaran</th>
+              <th class="px-6 py-3 font-semibold text-right">Realisasi</th>
+              <th class="px-6 py-3 font-semibold text-center">%</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-6 py-3.5 font-medium text-slate-700">Betonisasi Jalan Dukuh Pagerayu</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 420.000.000</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 420.000.000</td>
+              <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 text-xs font-bold">100%</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-6 py-3.5 font-medium text-slate-700">Rehab Saluran Irigasi Sawah</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 285.000.000</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 270.000.000</td>
+              <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 text-xs font-bold">95%</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-6 py-3.5 font-medium text-slate-700">BLT Dana Desa (Tahap I & II)</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 288.000.000</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 192.000.000</td>
+              <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded-full bg-sand-100 text-sand-600 text-xs font-bold">67%</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-6 py-3.5 font-medium text-slate-700">Operasional Pemerintah Desa</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 360.000.000</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 270.000.000</td>
+              <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded-full bg-sand-100 text-sand-600 text-xs font-bold">75%</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="px-6 py-3.5 font-medium text-slate-700">Kegiatan Posyandu & Kesehatan</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 95.000.000</td>
+              <td class="px-6 py-3.5 text-right text-slate-600">Rp 62.000.000</td>
+              <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded-full bg-sand-100 text-sand-600 text-xs font-bold">65%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div class="mb-6">
+      <h3 class="font-bold text-slate-900 text-lg mb-4">Dokumen Resmi</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="#" class="flex items-center gap-3 bg-white rounded-xl border border-slate-100 p-4 hover:border-brand-200 hover:shadow-md transition">
+          <span class="w-11 h-11 rounded-lg bg-red-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5z"/></svg>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-slate-800">Perdes APBDes 2025</p>
+            <p class="text-xs text-slate-400">PDF · 1,2 MB</p>
+          </div>
+        </a>
+        <a href="#" class="flex items-center gap-3 bg-white rounded-xl border border-slate-100 p-4 hover:border-brand-200 hover:shadow-md transition">
+          <span class="w-11 h-11 rounded-lg bg-red-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5z"/></svg>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-slate-800">Laporan Realisasi Sem. I</p>
+            <p class="text-xs text-slate-400">PDF · 890 KB</p>
+          </div>
+        </a>
+        <a href="#" class="flex items-center gap-3 bg-white rounded-xl border border-slate-100 p-4 hover:border-brand-200 hover:shadow-md transition">
+          <span class="w-11 h-11 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5z"/></svg>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-slate-800">Rincian DD per Desa (DJPK)</p>
+            <p class="text-xs text-slate-400">XLSX · 320 KB</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- SOURCE NOTE -->
+    <div class="flex items-start gap-3 bg-brand-50 border border-brand-100 rounded-xl p-4 text-sm text-brand-800">
+      <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <p><strong>Sumber data:</strong> Dokumen APBDes & Laporan Realisasi Pemerintah Desa Jatirokeh, dilengkapi data Rincian Dana Desa dari DJPK Kemenkeu. Terakhir diperbarui 12 Juni 2026. Data yang ditampilkan dapat berubah sesuai laporan resmi terbaru.</p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+        </div>
+        <p class="text-sm text-white font-semibold">Pemerintah Desa Jatirokeh</p>
+      </div>
+      <p class="text-xs">© 2026 Desa Jatirokeh · <span class="text-sand-400">Prototipe UI</span></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    Chart.defaults.font.family = 'Plus Jakarta Sans';
+    new Chart(document.getElementById('pendapatanChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Dana Desa (APBN)','Alokasi Dana Desa (ADD)','Bagi Hasil Pajak/Retribusi','Pendapatan Asli Desa','Bantuan Provinsi'],
+        datasets: [{ data: [1450, 820, 290, 180, 100], backgroundColor: ['#047857','#10b981','#f59e0b','#6ee7b7','#cbd5e1'], borderWidth: 0, hoverOffset: 8 }]
+      },
+      options: { cutout:'58%', plugins:{ legend:{ position:'bottom', labels:{ boxWidth:12, padding:12, font:{ size:11 } } }, tooltip:{ callbacks:{ label:(c)=>` Rp ${c.parsed} juta` } } } }
+    });
+    new Chart(document.getElementById('belanjaChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Pembangunan','Pemberdayaan','Pemerintahan','Pembinaan','Tak Terduga'],
+        datasets: [
+          { label:'Anggaran', data:[920,480,360,110,60], backgroundColor:'#a7f3d0', borderRadius:6 },
+          { label:'Realisasi', data:[875,312,270,48,15], backgroundColor:'#047857', borderRadius:6 }
+        ]
+      },
+      options: { plugins:{ legend:{ position:'bottom', labels:{ boxWidth:12, padding:12, font:{ size:11 } } }, tooltip:{ callbacks:{ label:(c)=>`${c.dataset.label}: Rp ${c.parsed.y} juta` } } },
+        scales:{ y:{ ticks:{ callback:(v)=>'Rp '+v+'jt', font:{ size:10 } }, grid:{ color:'#f1f5f9' } }, x:{ grid:{ display:false }, ticks:{ font:{ size:10 } } } } }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Potensi Desa — Desa Jatirokeh</title>
+  <meta name="description" content="Potensi pertanian, perdagangan, pendidikan, dan wisata sejarah Desa Jatirokeh, Kecamatan Songgom, Brebes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { brand: { 50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b' },
+        sand: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',400:'#fbbf24',500:'#f59e0b',600:'#d97706' } },
+      fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] } } } }
+  </script>
+</head>
+<body class="font-sans text-slate-700 bg-slate-50 antialiased">
+
+  <div class="bg-brand-900 text-brand-100 text-xs">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+      <span class="hidden sm:flex items-center gap-1.5">Kec. Songgom, Kab. Brebes, Jawa Tengah</span>
+      <a href="layanan.html" class="hover:text-white font-semibold text-sand-200">Lapor / Aduan</a>
+    </div>
+  </div>
+
+  <header x-data="{ open:false }" class="sticky top-0 z-50 bg-white shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white shadow-lg shadow-brand-600/30">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+          </div>
+          <div class="leading-tight">
+            <p class="font-extrabold text-slate-900 text-[15px]">DESA JATIROKEH</p>
+            <p class="text-[11px] text-slate-500 -mt-0.5">Kecamatan Songgom · Brebes</p>
+          </div>
+        </a>
+        <div class="hidden lg:flex items-center gap-1">
+          <a href="index.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Beranda</a>
+          <a href="profil.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Profil</a>
+          <a href="transparansi.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Transparansi</a>
+          <a href="berita.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Berita</a>
+          <a href="potensi.html" class="px-3 py-2 text-sm font-semibold text-brand-700 rounded-lg">Potensi</a>
+          <a href="kontak.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Kontak</a>
+          <a href="layanan.html" class="ml-2 px-4 py-2.5 text-sm font-semibold text-white bg-brand-700 hover:bg-brand-800 rounded-lg shadow-lg shadow-brand-600/25 transition">Layanan Surat</a>
+        </div>
+        <button @click="open=!open" class="lg:hidden p-2 text-slate-700">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="open" x-transition class="lg:hidden border-t border-slate-100 bg-white" style="display:none">
+      <div class="px-4 py-3 space-y-1">
+        <a href="index.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Beranda</a>
+        <a href="profil.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Profil Desa</a>
+        <a href="transparansi.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Transparansi APBDes</a>
+        <a href="berita.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Berita</a>
+        <a href="potensi.html" class="block px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-700 bg-brand-50">Potensi Desa</a>
+        <a href="kontak.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Kontak</a>
+        <a href="layanan.html" class="block px-3 py-2.5 rounded-lg text-sm font-semibold text-white bg-brand-700 text-center mt-2">Layanan Surat Online</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="bg-gradient-to-br from-brand-800 to-brand-900 relative overflow-hidden">
+    <div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-brand-700/30 blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-4 py-12 lg:py-16">
+      <nav class="text-xs text-brand-200 mb-3 flex items-center gap-2">
+        <a href="index.html" class="hover:text-white">Beranda</a> <span>/</span> <span class="text-white">Potensi Desa</span>
+      </nav>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">Potensi Desa Jatirokeh</h1>
+      <p class="text-brand-100/80 mt-3 max-w-2xl">Sentra pertanian, perdagangan, pendidikan Islam, dan wisata sejarah di jantung Kecamatan Songgom.</p>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 py-12 lg:py-16 space-y-16">
+
+    <!-- PERTANIAN -->
+    <section>
+      <div class="flex items-center gap-3 mb-8">
+        <span class="w-11 h-11 rounded-xl bg-brand-100 flex items-center justify-center">
+          <svg class="w-6 h-6 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>
+        </span>
+        <div>
+          <h2 class="text-2xl font-extrabold text-slate-900">Sektor Pertanian</h2>
+          <p class="text-sm text-slate-500">Produk unggulan sentra agraris Brebes</p>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
+          <img src="https://picsum.photos/seed/bawangmerah/500/300" class="w-full aspect-[5/3] object-cover" alt="Bawang merah" />
+          <div class="p-5">
+            <h3 class="font-bold text-slate-900">Bawang Merah</h3>
+            <p class="text-sm text-slate-500 mt-1">Komoditas primadona desa, ditanam pada musim kemarau dengan hasil berkualitas ekspor.</p>
+            <div class="flex gap-4 mt-4 text-center">
+              <div><p class="text-lg font-extrabold text-brand-700">±210</p><p class="text-[11px] text-slate-400">Ha lahan</p></div>
+              <div><p class="text-lg font-extrabold text-brand-700">2x</p><p class="text-[11px] text-slate-400">Panen/tahun</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
+          <img src="https://picsum.photos/seed/padisawah/500/300" class="w-full aspect-[5/3] object-cover" alt="Padi" />
+          <div class="p-5">
+            <h3 class="font-bold text-slate-900">Padi</h3>
+            <p class="text-sm text-slate-500 mt-1">Pangan pokok dengan sistem irigasi teknis yang didukung program desa.</p>
+            <div class="flex gap-4 mt-4 text-center">
+              <div><p class="text-lg font-extrabold text-brand-700">±180</p><p class="text-[11px] text-slate-400">Ha lahan</p></div>
+              <div><p class="text-lg font-extrabold text-brand-700">3x</p><p class="text-[11px] text-slate-400">Panen/tahun</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
+          <img src="https://picsum.photos/seed/jagungtani/500/300" class="w-full aspect-[5/3] object-cover" alt="Jagung" />
+          <div class="p-5">
+            <h3 class="font-bold text-slate-900">Jagung</h3>
+            <p class="text-sm text-slate-500 mt-1">Tanaman rotasi yang menopang pendapatan petani di luar musim utama.</p>
+            <div class="flex gap-4 mt-4 text-center">
+              <div><p class="text-lg font-extrabold text-brand-700">±95</p><p class="text-[11px] text-slate-400">Ha lahan</p></div>
+              <div><p class="text-lg font-extrabold text-brand-700">2x</p><p class="text-[11px] text-slate-400">Panen/tahun</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERDAGANGAN + PENDIDIKAN -->
+    <section class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
+        <div class="relative aspect-[16/9]">
+          <img src="https://picsum.photos/seed/pasardesa/700/400" class="w-full h-full object-cover" alt="Pasar Jatirokeh" />
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold">Perdagangan</span>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-900">Pasar Jatirokeh</h3>
+          <p class="text-sm text-slate-500 mt-2">Pasar besar yang menjadi pusat perputaran ekonomi Kecamatan Songgom. Menampung ratusan pedagang dan menjadi titik distribusi hasil bumi dari desa-desa sekitar.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
+        <div class="relative aspect-[16/9]">
+          <img src="https://picsum.photos/seed/ponpesalfalah/700/400" class="w-full h-full object-cover" alt="Ponpes Al-Falah" />
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-700 text-white text-xs font-semibold">Pendidikan</span>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-900">Pondok Pesantren Al-Falah</h3>
+          <p class="text-sm text-slate-500 mt-2">Lembaga pendidikan Islam terkemuka — Ponpes Al-Falah Salafiyah dan Pondok Pesantren Modern Al-Falah (MTs Al-Falah), menjadi tujuan menuntut ilmu dari berbagai daerah.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WISATA SEJARAH -->
+    <section class="relative rounded-3xl overflow-hidden">
+      <img src="https://picsum.photos/seed/tmppagerayu/1400/500" class="absolute inset-0 w-full h-full object-cover" alt="TMP Pagerayu" />
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-900/95 to-brand-900/50"></div>
+      <div class="relative p-8 lg:p-14 max-w-xl">
+        <span class="inline-block px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold mb-4">Wisata Sejarah</span>
+        <h2 class="text-2xl lg:text-3xl font-extrabold text-white">Taman Makam Pahlawan "Pagerayu"</h2>
+        <p class="text-brand-50/85 mt-3">Situs bersejarah di Dukuh Jatirokeh yang menjadi saksi bisu perjuangan rakyat melawan penjajah Belanda. Tempat ziarah dan edukasi sejarah bagi generasi muda desa.</p>
+        <a href="profil.html#sejarah" class="inline-flex items-center gap-2 mt-6 px-5 py-3 rounded-xl bg-white text-brand-800 font-bold hover:bg-sand-50 transition">
+          Pelajari Sejarahnya
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- INVESTOR CTA -->
+    <section class="bg-white rounded-2xl border border-slate-100 p-8 lg:p-10 text-center">
+      <h2 class="text-2xl font-extrabold text-slate-900">Tertarik berinvestasi atau bermitra?</h2>
+      <p class="text-slate-500 mt-2 max-w-xl mx-auto">Desa Jatirokeh terbuka untuk kerja sama pengembangan agribisnis, UMKM, dan pemasaran hasil pertanian. Hubungi kami untuk informasi lebih lanjut.</p>
+      <a href="kontak.html" class="inline-flex items-center gap-2 mt-6 px-6 py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold shadow-lg shadow-brand-600/25 transition">Hubungi Pemerintah Desa</a>
+    </section>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+        </div>
+        <p class="text-sm text-white font-semibold">Pemerintah Desa Jatirokeh</p>
+      </div>
+      <p class="text-xs">© 2026 Desa Jatirokeh · <span class="text-sand-400">Prototipe UI</span></p>
+    </div>
+  </footer>
+</body>
+</html>

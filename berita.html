@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Berita & Pengumuman — Desa Jatirokeh</title>
+  <meta name="description" content="Berita, kegiatan, dan pengumuman resmi Desa Jatirokeh, Kecamatan Songgom, Brebes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { brand: { 50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b' },
+        sand: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',400:'#fbbf24',500:'#f59e0b',600:'#d97706' } },
+      fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] } } } }
+  </script>
+</head>
+<body class="font-sans text-slate-700 bg-slate-50 antialiased">
+
+  <div class="bg-brand-900 text-brand-100 text-xs">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+      <span class="hidden sm:flex items-center gap-1.5">Kec. Songgom, Kab. Brebes, Jawa Tengah</span>
+      <a href="layanan.html" class="hover:text-white font-semibold text-sand-200">Lapor / Aduan</a>
+    </div>
+  </div>
+
+  <header x-data="{ open:false }" class="sticky top-0 z-50 bg-white shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white shadow-lg shadow-brand-600/30">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+          </div>
+          <div class="leading-tight">
+            <p class="font-extrabold text-slate-900 text-[15px]">DESA JATIROKEH</p>
+            <p class="text-[11px] text-slate-500 -mt-0.5">Kecamatan Songgom · Brebes</p>
+          </div>
+        </a>
+        <div class="hidden lg:flex items-center gap-1">
+          <a href="index.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Beranda</a>
+          <a href="profil.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Profil</a>
+          <a href="transparansi.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Transparansi</a>
+          <a href="berita.html" class="px-3 py-2 text-sm font-semibold text-brand-700 rounded-lg">Berita</a>
+          <a href="potensi.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Potensi</a>
+          <a href="kontak.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-700 rounded-lg">Kontak</a>
+          <a href="layanan.html" class="ml-2 px-4 py-2.5 text-sm font-semibold text-white bg-brand-700 hover:bg-brand-800 rounded-lg shadow-lg shadow-brand-600/25 transition">Layanan Surat</a>
+        </div>
+        <button @click="open=!open" class="lg:hidden p-2 text-slate-700">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="open" x-transition class="lg:hidden border-t border-slate-100 bg-white" style="display:none">
+      <div class="px-4 py-3 space-y-1">
+        <a href="index.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Beranda</a>
+        <a href="profil.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Profil Desa</a>
+        <a href="transparansi.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Transparansi APBDes</a>
+        <a href="berita.html" class="block px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-700 bg-brand-50">Berita</a>
+        <a href="potensi.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Potensi Desa</a>
+        <a href="kontak.html" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Kontak</a>
+        <a href="layanan.html" class="block px-3 py-2.5 rounded-lg text-sm font-semibold text-white bg-brand-700 text-center mt-2">Layanan Surat Online</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="bg-gradient-to-br from-brand-800 to-brand-900 relative overflow-hidden">
+    <div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-brand-700/30 blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-4 py-12 lg:py-16">
+      <nav class="text-xs text-brand-200 mb-3 flex items-center gap-2">
+        <a href="index.html" class="hover:text-white">Beranda</a> <span>/</span> <span class="text-white">Berita & Pengumuman</span>
+      </nav>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">Berita & Pengumuman</h1>
+      <p class="text-brand-100/80 mt-3 max-w-2xl">Informasi terkini seputar kegiatan, pembangunan, dan kebijakan Pemerintah Desa Jatirokeh.</p>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 py-10 lg:py-14" x-data="{ cat:'Semua' }">
+
+    <!-- SEARCH + FILTER -->
+    <div class="flex flex-col lg:flex-row gap-4 mb-8">
+      <div class="relative flex-1">
+        <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" placeholder="Cari berita atau pengumuman..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <template x-for="c in ['Semua','Pembangunan','Pemerintahan','Pertanian','Sosial','Keagamaan']">
+          <button @click="cat=c" :class="cat===c ? 'bg-brand-700 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:border-brand-300'" class="px-4 py-2 rounded-lg text-sm font-semibold transition" x-text="c"></button>
+        </template>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <!-- ARTICLES -->
+      <div class="lg:col-span-2">
+        <!-- FEATURED -->
+        <a href="berita-detail.html" class="group block mb-8">
+          <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition">
+            <div class="relative aspect-[16/9] overflow-hidden">
+              <img src="https://picsum.photos/seed/panenbawang/900/500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-700 text-white text-xs font-semibold">Pertanian</span>
+              <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold">Headline</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 text-xs text-slate-400 mb-2">
+                <span>18 Juni 2026</span><span>·</span><span>Admin Desa</span>
+              </div>
+              <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-brand-700 transition leading-snug">Panen Raya Bawang Merah, Harga Stabil di Pasar Jatirokeh</h2>
+              <p class="text-sm text-slate-500 mt-2 line-clamp-2">Petani Jatirokeh menikmati hasil panen melimpah musim ini berkat program perbaikan irigasi desa yang didanai APBDes 2025. Hasil panen diserap langsung oleh tengkulak lokal dengan harga yang menguntungkan...</p>
+            </div>
+          </article>
+        </a>
+
+        <!-- GRID -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          <a href="berita-detail.html" class="group">
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <img src="https://picsum.photos/seed/jalandesa/600/400" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
+                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-700 text-white text-xs font-semibold">Pembangunan</span>
+              </div>
+              <div class="p-5">
+                <p class="text-xs text-slate-400">10 Juni 2026</p>
+                <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug">Betonisasi Jalan Dukuh Pagerayu Rampung 100%</h3>
+                <p class="text-sm text-slate-500 mt-2 line-clamp-2">Akses warga menuju area persawahan kini lebih lancar dan tahan lama...</p>
+              </div>
+            </article>
+          </a>
+          <a href="berita-detail.html" class="group">
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <img src="https://picsum.photos/seed/posyandu/600/400" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
+                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold">Sosial</span>
+              </div>
+              <div class="p-5">
+                <p class="text-xs text-slate-400">15 Juni 2026</p>
+                <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug">Posyandu Balita Digelar Serentak di 8 RW</h3>
+                <p class="text-sm text-slate-500 mt-2 line-clamp-2">Pemeriksaan gizi dan imunisasi gratis bagi seluruh balita desa...</p>
+              </div>
+            </article>
+          </a>
+          <a href="berita-detail.html" class="group">
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <img src="https://picsum.photos/seed/ponpes/600/400" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
+                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-600 text-white text-xs font-semibold">Keagamaan</span>
+              </div>
+              <div class="p-5">
+                <p class="text-xs text-slate-400">8 Juni 2026</p>
+                <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug">Ponpes Al-Falah Gelar Haul Akbar & Khataman</h3>
+                <p class="text-sm text-slate-500 mt-2 line-clamp-2">Ribuan santri dan alumni hadir dalam acara tahunan pondok pesantren...</p>
+              </div>
+            </article>
+          </a>
+          <a href="berita-detail.html" class="group">
+            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <img src="https://picsum.photos/seed/musdes/600/400" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
+                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-600 text-white text-xs font-semibold">Pemerintahan</span>
+              </div>
+              <div class="p-5">
+                <p class="text-xs text-slate-400">5 Juni 2026</p>
+                <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug">Musdes Bahas Prioritas Pembangunan 2027</h3>
+                <p class="text-sm text-slate-500 mt-2 line-clamp-2">Warga dan BPD bersama menyusun rencana kerja pemerintah desa...</p>
+              </div>
+            </article>
+          </a>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="flex items-center justify-center gap-2 mt-10">
+          <button class="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="w-10 h-10 rounded-lg bg-brand-700 text-white font-semibold">1</button>
+          <button class="w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:bg-white font-semibold">2</button>
+          <button class="w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:bg-white font-semibold">3</button>
+          <button class="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-white">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="space-y-6">
+        <!-- PENGUMUMAN -->
+        <div class="bg-white rounded-2xl border border-slate-100 p-6">
+          <div class="flex items-center gap-2 mb-5">
+            <span class="w-8 h-8 rounded-lg bg-sand-100 flex items-center justify-center">
+              <svg class="w-4 h-4 text-sand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+            </span>
+            <h3 class="font-bold text-slate-900">Pengumuman Aktif</h3>
+          </div>
+          <div class="space-y-3">
+            <a href="#" class="block p-3 rounded-xl bg-sand-50 border border-sand-100 hover:border-sand-200 transition">
+              <p class="text-sm font-semibold text-slate-800 leading-snug">Pencairan BLT Dana Desa Tahap II</p>
+              <p class="text-xs text-slate-400 mt-1">Berlaku s/d 30 Juni 2026</p>
+            </a>
+            <a href="#" class="block p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-100">
+              <p class="text-sm font-semibold text-slate-800 leading-snug">Musyawarah Desa RKPDes 2027</p>
+              <p class="text-xs text-slate-400 mt-1">20 Juni 2026, 09.00 WIB</p>
+            </a>
+            <a href="#" class="block p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-100">
+              <p class="text-sm font-semibold text-slate-800 leading-snug">PSB Ponpes Al-Falah Dibuka</p>
+              <p class="text-xs text-slate-400 mt-1">Kuota terbatas</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- POPULAR -->
+        <div class="bg-white rounded-2xl border border-slate-100 p-6">
+          <h3 class="font-bold text-slate-900 mb-5">Terpopuler</h3>
+          <div class="space-y-4">
+            <a href="berita-detail.html" class="flex gap-3 group">
+              <span class="text-2xl font-extrabold text-slate-200 leading-none">01</span>
+              <p class="text-sm font-semibold text-slate-700 group-hover:text-brand-700 leading-snug transition">Cara Mengurus SKTM Online Lewat Website Desa</p>
+            </a>
+            <a href="berita-detail.html" class="flex gap-3 group">
+              <span class="text-2xl font-extrabold text-slate-200 leading-none">02</span>
+              <p class="text-sm font-semibold text-slate-700 group-hover:text-brand-700 leading-snug transition">Realisasi Dana Desa 2025 Tembus 68%</p>
+            </a>
+            <a href="berita-detail.html" class="flex gap-3 group">
+              <span class="text-2xl font-extrabold text-slate-200 leading-none">03</span>
+              <p class="text-sm font-semibold text-slate-700 group-hover:text-brand-700 leading-snug transition">Profil Lengkap Perangkat Desa Jatirokeh 2026</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-br from-brand-700 to-brand-800 rounded-2xl p-6 text-white">
+          <h3 class="font-bold text-lg">Dapatkan kabar via WhatsApp</h3>
+          <p class="text-sm text-brand-100/80 mt-1.5">Gabung grup info desa dan jangan ketinggalan pengumuman penting.</p>
+          <a href="#" class="mt-4 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white text-brand-700 font-semibold text-sm hover:bg-sand-50 transition">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
+            Gabung Sekarang
+          </a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+        </div>
+        <p class="text-sm text-white font-semibold">Pemerintah Desa Jatirokeh</p>
+      </div>
+      <p class="text-xs">© 2026 Desa Jatirokeh · <span class="text-sand-400">Prototipe UI</span></p>
+    </div>
+  </footer>
+</body>
+</html>
