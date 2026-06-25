@@ -420,6 +420,52 @@ CREATE TABLE settings (
     UNIQUE KEY uq_settings_key (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ---------------------------------------------------------------------
+-- 12. UMKM / DIREKTORI USAHA LOKAL (kuliner, kerajinan, dll)
+-- ---------------------------------------------------------------------
+CREATE TABLE businesses (
+    id              BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    category        ENUM('kuliner','kerajinan','pertanian','jasa','perdagangan','lainnya') NOT NULL DEFAULT 'kuliner',
+    name            VARCHAR(150) NOT NULL,
+    slug            VARCHAR(170) NOT NULL,
+    owner_name      VARCHAR(120) NULL,
+    description     TEXT NULL,
+    logo            VARCHAR(255) NULL,
+    cover_image     VARCHAR(255) NULL,
+    address         VARCHAR(255) NULL,        -- RT/RW, Dukuh
+    phone           VARCHAR(20)  NULL,
+    whatsapp        VARCHAR(20)  NULL,
+    maps_url        VARCHAR(255) NULL,
+    latitude        DECIMAL(10,7) NULL,
+    longitude       DECIMAL(10,7) NULL,
+    price_range     VARCHAR(50)  NULL,        -- mis. "Rp5rb - Rp25rb"
+    operating_hours VARCHAR(100) NULL,        -- mis. "Setiap hari 08.00-21.00"
+    is_featured     TINYINT(1) NOT NULL DEFAULT 0,
+    is_published    TINYINT(1) NOT NULL DEFAULT 1,
+    sort_order      INT UNSIGNED NOT NULL DEFAULT 0,
+    created_at      TIMESTAMP NULL,
+    updated_at      TIMESTAMP NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_businesses_slug (slug),
+    KEY idx_businesses_category (category, is_published)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE business_products (
+    id          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    business_id BIGINT UNSIGNED NOT NULL,
+    name        VARCHAR(150) NOT NULL,       -- nama menu/produk
+    price       BIGINT NULL,                 -- rupiah penuh (NULL = tanpa harga)
+    photo       VARCHAR(255) NULL,
+    description VARCHAR(255) NULL,
+    is_available TINYINT(1) NOT NULL DEFAULT 1,
+    sort_order  INT UNSIGNED NOT NULL DEFAULT 0,
+    created_at  TIMESTAMP NULL,
+    updated_at  TIMESTAMP NULL,
+    PRIMARY KEY (id),
+    KEY idx_bproducts_business (business_id),
+    CONSTRAINT fk_bproducts_business FOREIGN KEY (business_id) REFERENCES businesses (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- =====================================================================

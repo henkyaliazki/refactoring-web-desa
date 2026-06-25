@@ -22,6 +22,7 @@ Target DBMS: **MySQL 8** (produksi) / **SQLite** (pengembangan lokal).
 | Kependudukan (agregat) | `population_snapshots`, `population_breakdowns` |
 | Profil & Pemerintahan | `officials`, `village_boundaries`, `institutions` |
 | Potensi Desa | `potentials` |
+| UMKM / Direktori Usaha | `businesses`, `business_products` |
 | Galeri | `galleries`, `gallery_photos` |
 | Aspirasi / Pengaduan | `aspirations` |
 | Konfigurasi Situs | `settings` |
@@ -52,6 +53,7 @@ erDiagram
 
     population_snapshots ||--o{ population_breakdowns : "dirinci"
     galleries ||--o{ gallery_photos : "berisi"
+    businesses ||--o{ business_products : "menjual"
 
     roles {
         bigint id PK
@@ -241,6 +243,24 @@ erDiagram
         text value
         string group
     }
+    businesses {
+        bigint id PK
+        enum category "kuliner|kerajinan|pertanian|jasa|perdagangan|lainnya"
+        string name
+        string slug UK
+        string owner_name
+        string whatsapp
+        string price_range
+        boolean is_published
+    }
+    business_products {
+        bigint id PK
+        bigint business_id FK
+        string name
+        bigint price
+        string photo
+        boolean is_available
+    }
 ```
 
 ---
@@ -281,6 +301,10 @@ erDiagram
 - **`potentials`** — item potensi per `sector`; `stats` JSON (mis. `{"lahan_ha":210,"panen_per_tahun":2}`).
 - **`galleries`** + **`gallery_photos`** — album dokumentasi kegiatan.
 - **`aspirations`** — inbox terpadu dari form Kontak **dan** tombol "Lapor jika tidak sesuai" (kolom `related_project_id` mengaitkan laporan ke kegiatan tertentu).
+
+### UMKM / Direktori Usaha Lokal
+- **`businesses`** — daftar usaha warga. Kolom `category` (`kuliner`, `kerajinan`, `pertanian`, `jasa`, `perdagangan`, `lainnya`) membuat halaman **Kuliner** cukup jadi *filter* dari satu direktori — tidak perlu tabel terpisah per jenis. Menyimpan kontak (`phone`/`whatsapp`), lokasi (`maps_url`/koordinat), `price_range`, dan `operating_hours`. `is_featured` untuk diangkat di beranda, `is_published` untuk kontrol tampil.
+- **`business_products`** — menu/produk dari sebuah usaha (terutama berguna untuk kuliner: nama menu, `price` rupiah penuh, foto). `is_available` agar item bisa disembunyikan sementara tanpa dihapus.
 
 ### Konfigurasi & Audit
 - **`settings`** — key-value untuk identitas situs (alamat, telepon/WA, jam operasional, sosial media, foto hero).
