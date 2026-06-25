@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Uji terkait saat kode berubah",
+  "description": "Saat model, service, atau Livewire diubah, jalankan test Pest yang relevan untuk menangkap regresi lebih awal.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "app/Models/**/*.php",
+      "app/Services/**/*.php",
+      "app/Livewire/**/*.php",
+      "app/Filament/**/*.php"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Kode aplikasi baru saja diubah. Identifikasi test Pest yang relevan dengan perubahan ini lalu jalankan sekali (`./vendor/bin/pest --filter=...` atau seluruh suite bila kecil — JANGAN mode --watch). Jika ada test gagal, jelaskan penyebab dan usulkan perbaikan. Jangan membuat test baru kecuali diminta."
+  }
+}

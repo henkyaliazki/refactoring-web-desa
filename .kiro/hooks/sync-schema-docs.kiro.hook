@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Sinkronkan dokumentasi skema",
+  "description": "Saat migration diubah, ingatkan & bantu sinkronkan database/schema.sql dan docs/DATABASE.md (termasuk ERD).",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "database/migrations/**/*.php"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Sebuah migration diubah. Periksa apakah `database/schema.sql` dan `docs/DATABASE.md` (termasuk diagram ERD) masih sinkron dengan perubahan tersebut. Bila tidak, perbarui keduanya agar konsisten dengan migration. Pertahankan konvensi: uang BIGINT rupiah penuh, ENUM untuk status/type/category, foreign key eksplisit."
+  }
+}

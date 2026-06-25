@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "Tinjauan privasi data warga",
+  "description": "Saat kode yang menyentuh data pribadi (surat, lampiran, akun) diubah, lakukan tinjauan kepatuhan privasi.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "app/**/*Letter*.php",
+      "app/**/*Aspiration*.php",
+      "app/**/*User*.php"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Kode yang menyentuh data pribadi warga baru diubah. Tinjau terhadap aturan di steering 'security-privacy': akses dibatasi role operator/admin via Policy, lampiran KTP/KK di disk privat (bukan public), NIK/telepon dimasking di daftar, soft delete untuk data PII, dan tidak ada PII yang tertulis ke log. Laporkan temuan dan usulkan perbaikan bila ada pelanggaran."
+  }
+}

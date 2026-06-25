@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Format PHP saat disimpan",
+  "description": "Menjalankan Laravel Pint pada file PHP yang baru diubah agar konsisten dengan PSR-12.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "app/**/*.php",
+      "routes/**/*.php",
+      "database/**/*.php",
+      "tests/**/*.php"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "File PHP baru saja diubah. Jalankan `./vendor/bin/pint` pada file tersebut untuk merapikan format sesuai PSR-12. Laporkan ringkas perubahan format yang dilakukan. Jangan mengubah logika kode."
+  }
+}
