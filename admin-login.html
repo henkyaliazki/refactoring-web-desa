@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk Panel Admin — Desa Jatirokeh</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { brand: { 50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b' },
+        sand: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',400:'#fbbf24',500:'#f59e0b',600:'#d97706' } },
+      fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] } } } }
+  </script>
+</head>
+<body class="font-sans antialiased bg-slate-100">
+  <div class="min-h-screen grid lg:grid-cols-2">
+
+    <!-- LEFT: brand panel -->
+    <div class="hidden lg:flex relative bg-gradient-to-br from-brand-800 to-brand-900 p-12 flex-col justify-between overflow-hidden">
+      <div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-brand-700/40 blur-3xl"></div>
+      <div class="absolute -left-20 -bottom-20 w-96 h-96 rounded-full bg-sand-500/10 blur-3xl"></div>
+      <div class="relative flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-white/15 backdrop-blur flex items-center justify-center text-white border border-white/20">
+          <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+        </div>
+        <div class="leading-tight text-white">
+          <p class="font-extrabold text-lg">DESA JATIROKEH</p>
+          <p class="text-xs text-brand-200">Panel Administrasi</p>
+        </div>
+      </div>
+      <div class="relative text-white">
+        <h1 class="text-3xl font-extrabold leading-snug">Kelola informasi desa<br />yang transparan & melayani.</h1>
+        <p class="text-brand-100/80 mt-4 max-w-md">Publikasikan APBDes, unggah bukti pembangunan, dan proses layanan surat warga dari satu tempat.</p>
+        <div class="flex gap-6 mt-8">
+          <div><p class="text-2xl font-extrabold">100%</p><p class="text-xs text-brand-200">Tanpa coding</p></div>
+          <div><p class="text-2xl font-extrabold">4</p><p class="text-xs text-brand-200">Level akses</p></div>
+          <div><p class="text-2xl font-extrabold">Audit</p><p class="text-xs text-brand-200">Log perubahan</p></div>
+        </div>
+      </div>
+      <p class="relative text-xs text-brand-200/70">© 2026 Pemerintah Desa Jatirokeh · Prototipe UI</p>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="flex items-center justify-center p-6 sm:p-12">
+      <div class="w-full max-w-sm">
+        <div class="lg:hidden flex items-center gap-3 mb-8">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center text-white">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+          </div>
+          <div class="leading-tight">
+            <p class="font-extrabold text-slate-900">DESA JATIROKEH</p>
+            <p class="text-xs text-slate-500">Panel Administrasi</p>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-extrabold text-slate-900">Selamat datang 👋</h2>
+        <p class="text-sm text-slate-500 mt-1 mb-8">Masuk untuk mengelola konten desa.</p>
+
+        <form class="space-y-5">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Email</label>
+            <input type="email" value="admin@jatirokeh.desa.id" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-sm font-semibold text-slate-700">Kata Sandi</label>
+              <a href="#" class="text-xs font-semibold text-brand-700 hover:underline">Lupa sandi?</a>
+            </div>
+            <input type="password" value="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+          </div>
+          <label class="flex items-center gap-2.5 text-sm text-slate-600">
+            <input type="checkbox" class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" /> Ingat saya di perangkat ini
+          </label>
+          <a href="admin.html" class="block text-center w-full py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold shadow-lg shadow-brand-600/25 transition">Masuk</a>
+        </form>
+
+        <div class="mt-8 p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-500">
+          <p class="font-semibold text-slate-600 mb-1">Demo prototipe</p>
+          Klik <strong>Masuk</strong> untuk melihat dashboard admin (tidak ada autentikasi nyata pada mockup ini).
+        </div>
+
+        <a href="index.html" class="mt-6 inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-brand-700 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          Kembali ke situs publik
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

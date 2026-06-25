@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layanan Surat — Panel Admin Desa Jatirokeh</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { brand: { 50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b' },
+        sand: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',400:'#fbbf24',500:'#f59e0b',600:'#d97706' } },
+      fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] } } } }
+  </script>
+</head>
+<body class="font-sans antialiased bg-slate-100 text-slate-700" x-data="{ sidebar:false, detail:false }">
+<div class="flex min-h-screen">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-brand-900 text-brand-100 flex flex-col transition-transform lg:translate-x-0"
+         :class="sidebar ? 'translate-x-0' : '-translate-x-full'">
+    <div class="h-16 flex items-center gap-3 px-5 border-b border-white/10">
+      <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center text-white">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm-7 9v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7z"/></svg>
+      </div>
+      <div class="leading-tight"><p class="font-extrabold text-white text-sm">JATIROKEH</p><p class="text-[10px] text-brand-300">Panel Admin</p></div>
+    </div>
+    <nav class="flex-1 overflow-y-auto p-3 space-y-1 text-sm">
+      <p class="px-3 pt-2 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Utama</p>
+      <a href="admin.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Dashboard
+      </a>
+      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Transparansi</p>
+      <a href="admin-apbdes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        APBDes & Kegiatan
+      </a>
+      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Konten</p>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2zM12 8h.01M12 12h.01M12 16h.01"/></svg>
+        Berita & Pengumuman
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        Galeri
+      </a>
+      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Pelayanan</p>
+      <a href="admin-surat.html" class="flex items-center justify-between px-3 py-2.5 rounded-lg bg-white/10 text-white font-semibold">
+        <span class="flex items-center gap-3">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Layanan Surat
+        </span>
+        <span class="px-2 py-0.5 rounded-full bg-sand-500 text-white text-[10px] font-bold">5</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.3-3.9C3.5 15 3 13.5 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        Aspirasi & Aduan
+      </a>
+      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Data Desa</p>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4z"/></svg>
+        Statistik & Profil
+      </a>
+    </nav>
+    <div class="p-3 border-t border-white/10">
+      <a href="admin-login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition text-sm">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Keluar
+      </a>
+    </div>
+  </aside>
+  <div x-show="sidebar" @click="sidebar=false" class="fixed inset-0 bg-black/40 z-40 lg:hidden" style="display:none"></div>
+
+  <!-- MAIN -->
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <button @click="sidebar=!sidebar" class="lg:hidden p-2 -ml-2 text-slate-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <div>
+          <h1 class="font-bold text-slate-900">Layanan Surat</h1>
+          <p class="text-xs text-slate-400 hidden sm:block">Verifikasi & proses pengajuan warga</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-sm">RZ</div>
+        <div class="hidden sm:block leading-tight">
+          <p class="text-sm font-semibold text-slate-800">Rizal</p>
+          <p class="text-[11px] text-slate-400">Operator Surat</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 p-4 lg:p-6 space-y-5">
+      <!-- FILTER CHIPS -->
+      <div class="flex flex-wrap gap-2">
+        <button class="px-4 py-2 rounded-lg bg-brand-700 text-white text-sm font-semibold">Semua <span class="opacity-70">24</span></button>
+        <button class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-brand-300">Baru <span class="text-slate-400">2</span></button>
+        <button class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-brand-300">Diproses <span class="text-slate-400">3</span></button>
+        <button class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-brand-300">Selesai <span class="text-slate-400">19</span></button>
+      </div>
+
+      <!-- TABLE -->
+      <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-slate-50 text-left text-slate-500 text-xs uppercase tracking-wider">
+                <th class="px-6 py-3 font-semibold">Kode</th>
+                <th class="px-6 py-3 font-semibold">Pemohon</th>
+                <th class="px-6 py-3 font-semibold">Jenis Surat</th>
+                <th class="px-6 py-3 font-semibold">Tanggal</th>
+                <th class="px-6 py-3 font-semibold">Status</th>
+                <th class="px-6 py-3 font-semibold text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50/50">
+                <td class="px-6 py-3.5 font-mono text-xs text-slate-500">JTR-2026-0142</td>
+                <td class="px-6 py-3.5 font-medium text-slate-700">Henky Pratama</td>
+                <td class="px-6 py-3.5 text-slate-600">Ket. Domisili</td>
+                <td class="px-6 py-3.5 text-slate-500">25 Jun 2026</td>
+                <td class="px-6 py-3.5"><span class="px-2.5 py-1 rounded-full bg-sand-100 text-sand-600 text-xs font-bold">Diproses</span></td>
+                <td class="px-6 py-3.5 text-center"><button @click="detail=true" class="text-xs font-semibold text-brand-700 hover:underline">Tinjau</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50/50">
+                <td class="px-6 py-3.5 font-mono text-xs text-slate-500">JTR-2026-0141</td>
+                <td class="px-6 py-3.5 font-medium text-slate-700">Siti Aminah</td>
+                <td class="px-6 py-3.5 text-slate-600">SKTM</td>
+                <td class="px-6 py-3.5 text-slate-500">25 Jun 2026</td>
+                <td class="px-6 py-3.5"><span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 text-xs font-bold">Baru</span></td>
+                <td class="px-6 py-3.5 text-center"><button @click="detail=true" class="text-xs font-semibold text-brand-700 hover:underline">Tinjau</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50/50">
+                <td class="px-6 py-3.5 font-mono text-xs text-slate-500">JTR-2026-0140</td>
+                <td class="px-6 py-3.5 font-medium text-slate-700">Bambang Setiawan</td>
+                <td class="px-6 py-3.5 text-slate-600">Ket. Usaha</td>
+                <td class="px-6 py-3.5 text-slate-500">24 Jun 2026</td>
+                <td class="px-6 py-3.5"><span class="px-2.5 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold">Selesai</span></td>
+                <td class="px-6 py-3.5 text-center"><button @click="detail=true" class="text-xs font-semibold text-brand-700 hover:underline">Tinjau</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50/50">
+                <td class="px-6 py-3.5 font-mono text-xs text-slate-500">JTR-2026-0139</td>
+                <td class="px-6 py-3.5 font-medium text-slate-700">Rina Wati</td>
+                <td class="px-6 py-3.5 text-slate-600">Pengantar KK</td>
+                <td class="px-6 py-3.5 text-slate-500">24 Jun 2026</td>
+                <td class="px-6 py-3.5"><span class="px-2.5 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold">Selesai</span></td>
+                <td class="px-6 py-3.5 text-center"><button @click="detail=true" class="text-xs font-semibold text-brand-700 hover:underline">Tinjau</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ====== DETAIL DRAWER ====== -->
+<div x-show="detail" class="fixed inset-0 z-50" style="display:none">
+  <div @click="detail=false" x-show="detail" x-transition.opacity class="absolute inset-0 bg-black/40"></div>
+  <div x-show="detail" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+       x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
+       class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
+    <div class="h-16 flex items-center justify-between px-5 border-b border-slate-100">
+      <div>
+        <h2 class="font-bold text-slate-900">Detail Pengajuan</h2>
+        <p class="text-xs text-slate-400 font-mono">JTR-2026-0142</p>
+      </div>
+      <button @click="detail=false" class="p-2 text-slate-400 hover:bg-slate-100 rounded-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-5 space-y-5">
+      <div class="flex items-center justify-between">
+        <span class="px-2.5 py-1 rounded-full bg-sand-100 text-sand-600 text-xs font-bold">Diproses</span>
+        <span class="text-xs text-slate-400">Diajukan 25 Jun 2026, 09.14</span>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-slate-900 mb-3">Data Pemohon</h3>
+        <dl class="space-y-2.5 text-sm">
+          <div class="flex justify-between"><dt class="text-slate-400">Nama</dt><dd class="font-medium text-slate-700">Henky Pratama</dd></div>
+          <div class="flex justify-between"><dt class="text-slate-400">NIK</dt><dd class="font-medium text-slate-700 font-mono">3329xxxxxxxx0007</dd></div>
+          <div class="flex justify-between"><dt class="text-slate-400">Alamat</dt><dd class="font-medium text-slate-700">RT 02 / RW 04, Pagerayu</dd></div>
+          <div class="flex justify-between"><dt class="text-slate-400">WhatsApp</dt><dd class="font-medium text-slate-700">0812-xxxx-7890</dd></div>
+          <div class="flex justify-between"><dt class="text-slate-400">Keperluan</dt><dd class="font-medium text-slate-700">Melamar pekerjaan</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-slate-900 mb-3">Dokumen Lampiran</h3>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-xl border border-slate-200 overflow-hidden">
+            <img src="https://picsum.photos/seed/ktpscan/300/200" class="w-full aspect-[3/2] object-cover" alt="" />
+            <p class="text-xs text-slate-500 p-2 text-center">Scan KTP</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 overflow-hidden">
+            <img src="https://picsum.photos/seed/kkscan/300/200" class="w-full aspect-[3/2] object-cover" alt="" />
+            <p class="text-xs text-slate-500 p-2 text-center">Scan KK</p>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+        <h3 class="text-sm font-bold text-slate-900 mb-2">Ubah Status</h3>
+        <select class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm bg-white mb-3">
+          <option>Diproses — dokumen diverifikasi</option>
+          <option>Surat dicetak & ditandatangani</option>
+          <option>Siap diambil di kantor desa</option>
+          <option>Ditolak (lampirkan alasan)</option>
+        </select>
+        <label class="flex items-center gap-2 text-xs text-slate-500 mb-3">
+          <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+          Kirim notifikasi WhatsApp ke pemohon
+        </label>
+      </div>
+    </div>
+    <div class="p-5 border-t border-slate-100 flex gap-3">
+      <button class="flex-1 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm transition">Simpan & Kirim Notifikasi</button>
+      <button @click="detail=false" class="px-5 py-3 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 transition">Tutup</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
