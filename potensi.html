@@ -77,7 +77,7 @@
     </div>
   </section>
 
-  <main class="max-w-7xl mx-auto px-4 py-12 lg:py-16 space-y-16">
+  <main x-data="potensiApp()" class="max-w-7xl mx-auto px-4 py-12 lg:py-16 space-y-16">
 
     <!-- PERTANIAN -->
     <section>
@@ -91,79 +91,79 @@
         </div>
       </div>
       <div class="grid sm:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
-          <img src="https://picsum.photos/seed/bawangmerah/500/300" class="w-full aspect-[5/3] object-cover" alt="Bawang merah" />
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900">Bawang Merah</h3>
-            <p class="text-sm text-slate-500 mt-1">Komoditas primadona desa, ditanam pada musim kemarau dengan hasil berkualitas ekspor.</p>
-            <div class="flex gap-4 mt-4 text-center">
-              <div><p class="text-lg font-extrabold text-brand-700">±210</p><p class="text-[11px] text-slate-400">Ha lahan</p></div>
-              <div><p class="text-lg font-extrabold text-brand-700">2x</p><p class="text-[11px] text-slate-400">Panen/tahun</p></div>
+        <template x-for="p in potensiData.filter(p => p.sektor === 'Pertanian')" :key="p.nama">
+          <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
+            <img :src="p.img" class="w-full aspect-[5/3] object-cover" :alt="p.nama" />
+            <div class="p-5">
+              <h3 class="font-bold text-slate-900" x-text="p.nama"></h3>
+              <p class="text-sm text-slate-500 mt-1" x-text="p.desc"></p>
+              <div class="flex gap-4 mt-4 text-center">
+                <template x-for="s in p.stats" :key="s.l">
+                  <div><p class="text-lg font-extrabold text-brand-700" x-text="s.v"></p><p class="text-[11px] text-slate-400" x-text="s.l"></p></div>
+                </template>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
-          <img src="https://picsum.photos/seed/padisawah/500/300" class="w-full aspect-[5/3] object-cover" alt="Padi" />
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900">Padi</h3>
-            <p class="text-sm text-slate-500 mt-1">Pangan pokok dengan sistem irigasi teknis yang didukung program desa.</p>
-            <div class="flex gap-4 mt-4 text-center">
-              <div><p class="text-lg font-extrabold text-brand-700">±180</p><p class="text-[11px] text-slate-400">Ha lahan</p></div>
-              <div><p class="text-lg font-extrabold text-brand-700">3x</p><p class="text-[11px] text-slate-400">Panen/tahun</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
-          <img src="https://picsum.photos/seed/jagungtani/500/300" class="w-full aspect-[5/3] object-cover" alt="Jagung" />
-          <div class="p-5">
-            <h3 class="font-bold text-slate-900">Jagung</h3>
-            <p class="text-sm text-slate-500 mt-1">Tanaman rotasi yang menopang pendapatan petani di luar musim utama.</p>
-            <div class="flex gap-4 mt-4 text-center">
-              <div><p class="text-lg font-extrabold text-brand-700">±95</p><p class="text-[11px] text-slate-400">Ha lahan</p></div>
-              <div><p class="text-lg font-extrabold text-brand-700">2x</p><p class="text-[11px] text-slate-400">Panen/tahun</p></div>
-            </div>
-          </div>
-        </div>
+        </template>
       </div>
     </section>
 
     <!-- PERDAGANGAN + PENDIDIKAN -->
     <section class="grid lg:grid-cols-2 gap-6">
-      <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
-        <div class="relative aspect-[16/9]">
-          <img src="https://picsum.photos/seed/pasardesa/700/400" class="w-full h-full object-cover" alt="Pasar Jatirokeh" />
-          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold">Perdagangan</span>
+      <template x-for="p in potensiData.filter(p => p.sektor === 'Perdagangan' || p.sektor === 'Pendidikan')" :key="p.nama">
+        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
+          <div class="relative aspect-[16/9]">
+            <img :src="p.img" class="w-full h-full object-cover" :alt="p.nama" />
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-white text-xs font-semibold" :class="p.sektor === 'Perdagangan' ? 'bg-sand-500' : 'bg-brand-700'" x-text="p.sektor"></span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-slate-900" x-text="p.nama"></h3>
+            <p class="text-sm text-slate-500 mt-2" x-text="p.desc"></p>
+          </div>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-slate-900">Pasar Jatirokeh</h3>
-          <p class="text-sm text-slate-500 mt-2">Pasar besar yang menjadi pusat perputaran ekonomi Kecamatan Songgom. Menampung ratusan pedagang dan menjadi titik distribusi hasil bumi dari desa-desa sekitar.</p>
-        </div>
-      </div>
-      <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-lg transition">
-        <div class="relative aspect-[16/9]">
-          <img src="https://picsum.photos/seed/ponpesalfalah/700/400" class="w-full h-full object-cover" alt="Ponpes Al-Falah" />
-          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-700 text-white text-xs font-semibold">Pendidikan</span>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-slate-900">Pondok Pesantren Al-Falah</h3>
-          <p class="text-sm text-slate-500 mt-2">Lembaga pendidikan Islam terkemuka — Ponpes Al-Falah Salafiyah dan Pondok Pesantren Modern Al-Falah (MTs Al-Falah), menjadi tujuan menuntut ilmu dari berbagai daerah.</p>
-        </div>
-      </div>
+      </template>
     </section>
 
     <!-- WISATA SEJARAH -->
-    <section class="relative rounded-3xl overflow-hidden">
-      <img src="https://picsum.photos/seed/tmppagerayu/1400/500" class="absolute inset-0 w-full h-full object-cover" alt="TMP Pagerayu" />
-      <div class="absolute inset-0 bg-gradient-to-r from-brand-900/95 to-brand-900/50"></div>
-      <div class="relative p-8 lg:p-14 max-w-xl">
-        <span class="inline-block px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold mb-4">Wisata Sejarah</span>
-        <h2 class="text-2xl lg:text-3xl font-extrabold text-white">Taman Makam Pahlawan "Pagerayu"</h2>
-        <p class="text-brand-50/85 mt-3">Situs bersejarah di Dukuh Jatirokeh yang menjadi saksi bisu perjuangan rakyat melawan penjajah Belanda. Tempat ziarah dan edukasi sejarah bagi generasi muda desa.</p>
-        <a href="profil.html#sejarah" class="inline-flex items-center gap-2 mt-6 px-5 py-3 rounded-xl bg-white text-brand-800 font-bold hover:bg-sand-50 transition">
-          Pelajari Sejarahnya
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-        </a>
+    <template x-for="p in potensiData.filter(p => p.sektor === 'Wisata Sejarah')" :key="p.nama">
+      <section class="relative rounded-3xl overflow-hidden">
+        <img :src="p.img" class="absolute inset-0 w-full h-full object-cover" :alt="p.nama" />
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-900/95 to-brand-900/50"></div>
+        <div class="relative p-8 lg:p-14 max-w-xl">
+          <span class="inline-block px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold mb-4">Wisata Sejarah</span>
+          <h2 class="text-2xl lg:text-3xl font-extrabold text-white" x-text="p.nama"></h2>
+          <p class="text-brand-50/85 mt-3" x-text="p.desc"></p>
+          <a href="profil.html#sejarah" class="inline-flex items-center gap-2 mt-6 px-5 py-3 rounded-xl bg-white text-brand-800 font-bold hover:bg-sand-50 transition">
+            Pelajari Sejarahnya
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </a>
+        </div>
+      </section>
+    </template>
+
+    <!-- DIREKTORI UMKM -->
+    <section>
+      <div class="text-center max-w-2xl mx-auto mb-6">
+        <span class="text-sm font-bold text-brand-600 uppercase tracking-wider">Direktori UMKM</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">UMKM & Usaha Warga</h2>
+        <p class="text-slate-500 mt-2 text-sm sm:text-base">Kenali dan dukung usaha tetangga sendiri — hubungi langsung lewat WhatsApp.</p>
       </div>
+      <p class="max-w-2xl mx-auto text-center text-xs font-semibold text-sand-600 bg-sand-50 border border-sand-100 rounded-xl px-4 py-3 mb-8">⚠️ Contoh tampilan — data UMKM asli sedang didata perangkat desa. Nama & nomor di bawah ini masih contoh, bukan data sebenarnya.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <template x-for="u in umkmData" :key="u.nama">
+          <div class="bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition flex flex-col">
+            <div class="flex items-start justify-between gap-2">
+              <span class="text-xs px-2 py-1 rounded-full bg-brand-50 text-brand-700 font-semibold" x-text="u.jenis"></span>
+              <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-500" x-text="u.area"></span>
+            </div>
+            <h3 class="font-bold text-slate-900 mt-3" x-text="u.nama"></h3>
+            <p class="text-sm text-slate-500 mt-1 flex-1" x-text="u.desc"></p>
+            <!-- shortcut: nomor WA UMKM masih PLACEHOLDER 0812-0000-0000 — ganti dengan nomor pemilik usaha asli saat data UMKM selesai didata. -->
+            <a :href="waUmkm(u)" target="_blank" rel="noopener" class="mt-4 py-2.5 rounded-lg bg-[#25D366] hover:brightness-95 text-white text-sm font-bold text-center transition">Chat WhatsApp</a>
+          </div>
+        </template>
+      </div>
+      <p class="text-center text-sm text-slate-500 mt-8">Punya usaha di Jatirokeh dan ingin tampil di direktori ini? <a href="kontak.html" class="font-bold text-brand-700 hover:text-brand-800">Hubungi perangkat desa →</a></p>
     </section>
 
     <!-- INVESTOR CTA -->
@@ -173,6 +173,31 @@
       <a href="kontak.html" class="inline-flex items-center gap-2 mt-6 px-6 py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold shadow-lg shadow-brand-600/25 transition">Hubungi Pemerintah Desa</a>
     </section>
   </main>
+
+  <script>
+    function potensiApp() {
+      const WA_PLACEHOLDER = '6281200000000'; // shortcut: placeholder — ganti per-UMKM dengan nomor pemilik usaha asli saat pendataan selesai
+      // Data potensi = konten yang sudah ada di halaman ini sebelumnya (deskripsi & angka tidak diubah).
+      const potensiData = [
+        { sektor:'Pertanian', nama:'Bawang Merah', desc:'Komoditas primadona desa, ditanam pada musim kemarau dengan hasil berkualitas ekspor.', img:'https://picsum.photos/seed/bawangmerah/500/300', stats:[{ v:'±210', l:'Ha lahan' }, { v:'2x', l:'Panen/tahun' }] },
+        { sektor:'Pertanian', nama:'Padi', desc:'Pangan pokok dengan sistem irigasi teknis yang didukung program desa.', img:'https://picsum.photos/seed/padisawah/500/300', stats:[{ v:'±180', l:'Ha lahan' }, { v:'3x', l:'Panen/tahun' }] },
+        { sektor:'Pertanian', nama:'Jagung', desc:'Tanaman rotasi yang menopang pendapatan petani di luar musim utama.', img:'https://picsum.photos/seed/jagungtani/500/300', stats:[{ v:'±95', l:'Ha lahan' }, { v:'2x', l:'Panen/tahun' }] },
+        { sektor:'Perdagangan', nama:'Pasar Jatirokeh', desc:'Pasar besar yang menjadi pusat perputaran ekonomi Kecamatan Songgom. Menampung ratusan pedagang dan menjadi titik distribusi hasil bumi dari desa-desa sekitar.', img:'https://picsum.photos/seed/pasardesa/700/400' },
+        { sektor:'Pendidikan', nama:'Pondok Pesantren Al-Falah', desc:'Lembaga pendidikan Islam terkemuka — Ponpes Al-Falah Salafiyah dan Pondok Pesantren Modern Al-Falah (MTs Al-Falah), menjadi tujuan menuntut ilmu dari berbagai daerah.', img:'https://picsum.photos/seed/ponpesalfalah/700/400' },
+        { sektor:'Wisata Sejarah', nama:'Taman Makam Pahlawan "Pagerayu"', desc:'Situs bersejarah di Dukuh Jatirokeh yang menjadi saksi bisu perjuangan rakyat melawan penjajah Belanda. Tempat ziarah dan edukasi sejarah bagi generasi muda desa.', img:'https://picsum.photos/seed/tmppagerayu/1400/500' },
+      ];
+      // CONTOH tampilan saja (diberi label di UI) — bukan data UMKM asli; ganti dengan hasil pendataan perangkat desa.
+      const umkmData = [
+        { nama:'Warung Sembako "Bu Tini" (contoh)', jenis:'Sembako & Hasil Tani', area:'Dukuh Jatirokeh', desc:'Sembako harian dan hasil tani warga, termasuk bawang merah eceran & grosir kecil.' },
+        { nama:'Bengkel Las "Mas Rudi" (contoh)', jenis:'Jasa Las & Alat Tani', area:'Jl. Raya Songgom', desc:'Perbaikan alat pertanian, pagar, dan tralis — bisa dipanggil ke rumah/lahan.' },
+        { nama:'Dapur Jajanan "Bu Sari" (contoh)', jenis:'Kue & Jajanan Pasar', area:'Dekat Pasar Jatirokeh', desc:'Jajanan pasar tiap pagi dan pesanan kue untuk hajatan & acara desa.' },
+      ];
+      return {
+        potensiData, umkmData,
+        waUmkm(u) { return 'https://wa.me/' + WA_PLACEHOLDER + '?text=' + encodeURIComponent('Halo, saya melihat usaha Anda (' + u.nama.replace(' (contoh)', '') + ') di direktori UMKM Desa Jatirokeh. Saya ingin bertanya lebih lanjut.'); }
+      };
+    }
+  </script>
 
   <footer class="bg-slate-900 text-slate-400 mt-10">
     <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">

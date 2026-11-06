@@ -67,72 +67,124 @@
     </div>
   </header>
 
-  <article class="max-w-3xl mx-auto px-4 py-10 lg:py-14">
-    <nav class="text-xs text-slate-400 mb-5 flex items-center gap-2">
-      <a href="index.html" class="hover:text-brand-700">Beranda</a> <span>/</span>
-      <a href="berita.html" class="hover:text-brand-700">Berita</a> <span>/</span>
-      <span class="text-slate-600">Pertanian</span>
-    </nav>
+  <article class="max-w-3xl mx-auto px-4 py-10 lg:py-14" x-data="detailApp()">
+    <template x-if="b">
+      <div>
+        <nav class="text-xs text-slate-400 mb-5 flex items-center gap-2">
+          <a href="index.html" class="hover:text-brand-700">Beranda</a> <span>/</span>
+          <a href="berita.html" class="hover:text-brand-700">Berita</a> <span>/</span>
+          <span class="text-slate-600" x-text="b.kat"></span>
+        </nav>
 
-    <span class="inline-block px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold mb-4">Pertanian</span>
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">Panen Raya Bawang Merah, Harga Stabil di Pasar Jatirokeh</h1>
+        <span class="inline-block px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold mb-4" x-text="b.kat"></span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight" x-text="b.judul"></h1>
 
-    <div class="flex items-center gap-4 mt-5 pb-6 border-b border-slate-100">
-      <div class="flex items-center gap-2.5">
-        <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-sm">AD</div>
-        <div>
-          <p class="text-sm font-semibold text-slate-800">Admin Desa Jatirokeh</p>
-          <p class="text-xs text-slate-400">18 Juni 2026 · 4 menit baca</p>
+        <div class="flex items-center gap-4 mt-5 pb-6 border-b border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-sm">AD</div>
+            <div>
+              <p class="text-sm font-semibold text-slate-800">Admin Desa Jatirokeh</p>
+              <p class="text-xs text-slate-400" x-text="b.tanggal"></p>
+            </div>
+          </div>
+        </div>
+
+        <img :src="'https://picsum.photos/seed/' + b.seed + '/1000/560'" class="w-full rounded-2xl mt-6 aspect-[16/9] object-cover" :alt="b.judul" />
+        <p class="text-xs text-slate-400 mt-2 italic text-center">Ilustrasi kegiatan di Desa Jatirokeh. (Dok. Pemdes)</p>
+
+        <div class="mt-8 space-y-5 text-[15px] leading-relaxed text-slate-700">
+          <template x-for="(p,i) in b.isi" :key="i">
+            <p x-text="p"></p>
+          </template>
+        </div>
+
+        <!-- SHARE -->
+        <div class="mt-10 pt-6 border-t border-slate-100">
+          <p class="text-sm font-semibold text-slate-700 mb-3">Bagikan berita ini:</p>
+          <a :href="bagikan" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-green-500 hover:bg-green-600 text-white text-sm font-semibold transition">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
+            Bagikan via WhatsApp
+          </a>
+        </div>
+
+        <!-- RELATED -->
+        <div class="mt-12">
+          <h3 class="font-bold text-slate-900 text-lg mb-5">Berita Terkait</h3>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <template x-for="r in terkait" :key="r.id">
+              <a :href="'berita-detail.html?id=' + r.id" class="group flex gap-4 bg-white rounded-xl border border-slate-100 p-3 hover:shadow-md transition">
+                <img :src="'https://picsum.photos/seed/' + r.seed + '/200/200'" class="w-20 h-20 rounded-lg object-cover flex-shrink-0" alt="" />
+                <div>
+                  <span class="text-xs text-brand-600 font-semibold" x-text="r.kat"></span>
+                  <h4 class="text-sm font-bold text-slate-800 group-hover:text-brand-700 leading-snug mt-1" x-text="r.judul"></h4>
+                </div>
+              </a>
+            </template>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
 
-    <img src="https://picsum.photos/seed/panenbawang/1000/560" class="w-full rounded-2xl mt-6 aspect-[16/9] object-cover" alt="Panen bawang merah" />
-    <p class="text-xs text-slate-400 mt-2 italic text-center">Petani memanen bawang merah di area persawahan Desa Jatirokeh. (Dok. Pemdes)</p>
-
-    <div class="prose prose-slate max-w-none mt-8 space-y-5 text-[15px] leading-relaxed text-slate-700">
-      <p><strong>JATIROKEH</strong> — Musim panen bawang merah tahun ini membawa senyum bagi ratusan petani Desa Jatirokeh. Hasil panen yang melimpah disertai harga jual yang stabil di Pasar Jatirokeh menjadikan musim ini salah satu yang paling menguntungkan dalam beberapa tahun terakhir.</p>
-      <p>Keberhasilan ini tidak lepas dari program rehabilitasi saluran irigasi yang didanai melalui APBDes 2025. Perbaikan irigasi sepanjang dua kilometer memastikan pasokan air ke area persawahan tetap lancar sepanjang musim tanam.</p>
-      <blockquote class="border-l-4 border-brand-500 pl-5 py-1 text-slate-600 italic">"Dengan irigasi yang lancar, hasil panen kami meningkat hampir 30 persen dibanding tahun lalu. Ini bukti dana desa benar-benar dirasakan manfaatnya," ujar salah satu petani setempat.</blockquote>
-      <p>Pemerintah desa berkomitmen untuk terus mendukung sektor pertanian sebagai tulang punggung ekonomi Jatirokeh. Selain bawang merah, desa ini juga dikenal sebagai sentra produksi padi dan jagung di Kecamatan Songgom.</p>
-      <h2 class="text-xl font-bold text-slate-900 mt-8">Rencana Tindak Lanjut</h2>
-      <p>Ke depan, pemerintah desa berencana mengembangkan koperasi tani untuk memperkuat posisi tawar petani dalam menentukan harga jual, serta membuka akses pasar yang lebih luas hingga ke luar daerah.</p>
-    </div>
-
-    <!-- SHARE -->
-    <div class="mt-10 pt-6 border-t border-slate-100">
-      <p class="text-sm font-semibold text-slate-700 mb-3">Bagikan berita ini:</p>
-      <div class="flex flex-wrap gap-2">
-        <a href="#" class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-green-500 hover:bg-green-600 text-white text-sm font-semibold transition">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
-          WhatsApp
-        </a>
-        <a href="#" class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition">Facebook</a>
-        <a href="#" class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold transition">Salin Tautan</a>
-      </div>
-    </div>
-
-    <!-- RELATED -->
-    <div class="mt-12">
-      <h3 class="font-bold text-slate-900 text-lg mb-5">Berita Terkait</h3>
-      <div class="grid sm:grid-cols-2 gap-5">
-        <a href="berita-detail.html" class="group flex gap-4 bg-white rounded-xl border border-slate-100 p-3 hover:shadow-md transition">
-          <img src="https://picsum.photos/seed/jalandesa/200/200" class="w-20 h-20 rounded-lg object-cover flex-shrink-0" alt="" />
-          <div>
-            <span class="text-xs text-brand-600 font-semibold">Pembangunan</span>
-            <h4 class="text-sm font-bold text-slate-800 group-hover:text-brand-700 leading-snug mt-1">Betonisasi Jalan Dukuh Pagerayu Rampung 100%</h4>
-          </div>
-        </a>
-        <a href="berita-detail.html" class="group flex gap-4 bg-white rounded-xl border border-slate-100 p-3 hover:shadow-md transition">
-          <img src="https://picsum.photos/seed/musdes/200/200" class="w-20 h-20 rounded-lg object-cover flex-shrink-0" alt="" />
-          <div>
-            <span class="text-xs text-brand-600 font-semibold">Pemerintahan</span>
-            <h4 class="text-sm font-bold text-slate-800 group-hover:text-brand-700 leading-snug mt-1">Musdes Bahas Prioritas Pembangunan 2027</h4>
-          </div>
-        </a>
-      </div>
+    <!-- TIDAK DITEMUKAN -->
+    <div x-show="!b" style="display:none" class="text-center py-10">
+      <p class="text-4xl mb-4">🔍</p>
+      <h1 class="text-2xl font-extrabold text-slate-900">Berita tidak ditemukan</h1>
+      <p class="text-sm text-slate-500 mt-3 max-w-md mx-auto">Maaf, berita yang Anda cari tidak ada atau tautannya sudah berubah. Silakan kembali ke daftar berita untuk melihat kabar terbaru Desa Jatirokeh.</p>
+      <a href="berita.html" class="inline-block mt-6 px-6 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-semibold text-sm transition">← Kembali ke Daftar Berita</a>
     </div>
   </article>
+
+  <script>
+    // shortcut: data artikel diduplikasi dari berita.html (beritaData) sampai ada backend/CMS —
+    // saat mengubah judul/tanggal berita, ubah di kedua file, atau pindahkan ke satu file data bersama.
+    function detailApp() {
+      const artikelData = [
+        { id:'panen-raya-bawang-merah', kat:'Pertanian', tanggal:'18 Juni 2026', seed:'panenbawang', judul:'Panen Raya Bawang Merah, Harga Stabil di Pasar Jatirokeh', isi:[
+          'JATIROKEH — Musim panen bawang merah tahun ini membawa senyum bagi ratusan petani Desa Jatirokeh. Hasil panen yang melimpah disertai harga jual yang stabil di Pasar Jatirokeh menjadikan musim ini salah satu yang paling menguntungkan dalam beberapa tahun terakhir.',
+          'Keberhasilan ini tidak lepas dari program rehabilitasi saluran irigasi yang didanai melalui APBDes 2025. Perbaikan irigasi sepanjang dua kilometer memastikan pasokan air ke area persawahan tetap lancar sepanjang musim tanam.',
+          '"Dengan irigasi yang lancar, hasil panen kami meningkat hampir 30 persen dibanding tahun lalu. Ini bukti dana desa benar-benar dirasakan manfaatnya," ujar salah satu petani setempat.',
+          'Hasil panen musim ini diserap langsung oleh tengkulak lokal dengan harga yang menguntungkan petani. Pemerintah desa berkomitmen untuk terus mendukung sektor pertanian sebagai tulang punggung ekonomi Jatirokeh. Selain bawang merah, desa ini juga dikenal sebagai sentra produksi padi dan jagung di Kecamatan Songgom.',
+          'Ke depan, pemerintah desa berencana mengembangkan koperasi tani untuk memperkuat posisi tawar petani dalam menentukan harga jual, serta membuka akses pasar yang lebih luas hingga ke luar daerah.'
+        ]},
+        { id:'posyandu-balita-8-rw', kat:'Sosial', tanggal:'15 Juni 2026', seed:'posyandu', judul:'Posyandu Balita Digelar Serentak di 8 RW', isi:[
+          'Posyandu balita digelar serentak di 8 RW se-Desa Jatirokeh. Kegiatan rutin ini menjadi kesempatan bagi orang tua untuk memantau tumbuh kembang anak tanpa harus pergi jauh ke fasilitas kesehatan.',
+          'Dalam kegiatan ini, balita mendapatkan pemeriksaan gizi dan imunisasi secara gratis. Penimbangan berat badan dan pengukuran tinggi badan dicatat oleh kader untuk memantau pertumbuhan setiap anak dari bulan ke bulan.',
+          'Posyandu merupakan layanan kesehatan paling dekat dengan warga. Kehadiran kader di tiap RW membuat pemeriksaan dasar bagi balita, ibu hamil, dan lansia bisa dilakukan tepat di lingkungan tempat tinggal.',
+          'Pemerintah desa mengimbau para orang tua untuk rutin membawa balitanya ke Posyandu setiap bulan dan memantau pengumuman jadwal berikutnya melalui halaman Berita & Pengumuman desa.'
+        ]},
+        { id:'betonisasi-jalan-pagerayu', kat:'Pembangunan', tanggal:'10 Juni 2026', seed:'jalandesa', judul:'Betonisasi Jalan Dukuh Pagerayu Rampung 100%', isi:[
+          'Pekerjaan betonisasi jalan di Dukuh Pagerayu telah rampung 100%. Jalan yang menjadi akses warga sehari-hari ini kini berpermukaan beton dan siap digunakan sepenuhnya.',
+          'Dengan permukaan yang lebih baik, akses warga menuju area persawahan kini lebih lancar dan tahan lama. Kendaraan pengangkut hasil pertanian maupun aktivitas harian warga tidak lagi terkendala kondisi jalan seperti sebelumnya.',
+          'Jalan desa yang baik adalah penopang utama kegiatan ekonomi warga. Kelancaran akses menuju sawah dan pasar membantu menekan biaya angkut dan mempercepat distribusi hasil panen.',
+          'Pemerintah desa mengajak seluruh warga untuk ikut menjaga dan memelihara jalan yang telah dibangun bersama. Apabila ditemukan kerusakan, warga dapat melaporkannya melalui layanan Lapor / Aduan di website desa.'
+        ]},
+        { id:'ponpes-al-falah-haul', kat:'Keagamaan', tanggal:'8 Juni 2026', seed:'ponpes', judul:'Ponpes Al-Falah Gelar Haul Akbar & Khataman', isi:[
+          'Pondok Pesantren Al-Falah menggelar Haul Akbar dan Khataman sebagai acara tahunan pondok. Ribuan santri dan alumni hadir memeriahkan rangkaian kegiatan yang menjadi momen paling ditunggu keluarga besar pondok pesantren.',
+          'Haul merupakan peringatan tahunan untuk mendoakan dan mengenang jasa para pendiri serta masyayikh pondok, sementara khataman menandai selesainya santri mengkhatamkan bacaan Al-Qur\u2019an. Keduanya menjadi wujud syukur sekaligus penguat ikatan antara pondok, santri, dan masyarakat.',
+          'Kehadiran para alumni dari berbagai daerah menjadikan acara ini juga ajang silaturahmi. Masyarakat sekitar ikut hadir dan merasakan semarak kegiatan keagamaan di lingkungan pondok.',
+          'Pemerintah desa mendukung kegiatan keagamaan seperti ini sebagai bagian dari kehidupan masyarakat Jatirokeh yang religius, sejalan dengan visi desa yang berbasis pertanian dan nilai religius.'
+        ]},
+        { id:'musdes-prioritas-2027', kat:'Pemerintahan', tanggal:'5 Juni 2026', seed:'musdes', judul:'Musdes Bahas Prioritas Pembangunan 2027', isi:[
+          'Musyawarah Desa (Musdes) membahas prioritas pembangunan tahun 2027. Warga bersama Badan Permusyawaratan Desa (BPD) duduk bersama menyusun rencana kerja pemerintah desa untuk tahun mendatang.',
+          'Musdes adalah forum resmi desa tempat setiap unsur masyarakat menyampaikan usulan — mulai dari pembangunan jalan dan irigasi hingga kegiatan sosial dan keagamaan. Usulan yang masuk dibahas dan disepakati bersama berdasarkan kebutuhan paling mendesak.',
+          'Hasil kesepakatan Musdes menjadi dasar penyusunan Rencana Kerja Pemerintah Desa (RKPDes) 2027, yang selanjutnya menjadi acuan penganggaran desa. Dengan cara ini, arah pembangunan desa ditentukan secara terbuka bersama warga, bukan sepihak.',
+          'Pemerintah desa mengajak warga untuk terus berpartisipasi, baik dengan hadir dalam forum musyawarah maupun dengan mengawal pelaksanaan program yang telah disepakati.'
+        ]},
+      ];
+      return {
+        artikelData, b: null, bagikan: '#',
+        init() {
+          const id = new URLSearchParams(location.search).get('id');
+          this.b = this.artikelData.find(a => a.id === id) || null;
+          if (this.b) {
+            document.title = this.b.judul + ' — Desa Jatirokeh';
+            this.bagikan = 'https://wa.me/?text=' + encodeURIComponent(this.b.judul + ' — ' + location.href);
+          }
+        },
+        get terkait() { return this.artikelData.filter(a => !this.b || a.id !== this.b.id).slice(0, 2); }
+      };
+    }
+  </script>
 
   <footer class="bg-slate-900 text-slate-400 mt-10">
     <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
