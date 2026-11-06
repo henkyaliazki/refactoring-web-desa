@@ -77,106 +77,82 @@
     </div>
   </section>
 
-  <main x-data="{ tab:'ajukan' }" class="max-w-6xl mx-auto px-4 py-10 lg:py-14">
+  <main x-data="layananApp()" class="max-w-6xl mx-auto px-4 py-10 lg:py-14">
+
+    <!-- ============ WARGA HARUS TAU ============ -->
+    <section class="mb-12">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="text-sm font-bold text-brand-600 uppercase tracking-wider">Warga Harus Tau</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Urus surat di desa itu sebenarnya mudah</h2>
+        <p class="text-slate-500 mt-2 text-sm sm:text-base">Empat hal ini hak Anda sebagai warga — bukan kebaikan petugas:</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl border border-slate-100 p-5">
+          <p class="text-2xl mb-2">🆓</p>
+          <h3 class="font-bold text-slate-900 text-sm">Semua surat GRATIS</h3>
+          <p class="text-xs text-slate-500 mt-1">Biaya Rp0. Jika ada yang meminta uang di luar ketentuan, laporkan lewat menu Lapor / Aduan.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-5">
+          <p class="text-2xl mb-2">📋</p>
+          <h3 class="font-bold text-slate-900 text-sm">Syarat jelas di awal</h3>
+          <p class="text-xs text-slate-500 mt-1">Setiap layanan di bawah mencantumkan syaratnya. Siapkan dulu, tidak perlu bolak-balik ke kantor.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-5">
+          <p class="text-2xl mb-2">⏱️</p>
+          <h3 class="font-bold text-slate-900 text-sm">Estimasi tertulis</h3>
+          <p class="text-xs text-slate-500 mt-1">Kebanyakan surat selesai 1–2 hari kerja. Jam layanan: Senin–Jumat, 08.00–14.00 WIB.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-5">
+          <p class="text-2xl mb-2">📱</p>
+          <h3 class="font-bold text-slate-900 text-sm">Bisa dari rumah</h3>
+          <p class="text-xs text-slate-500 mt-1">Isi form di halaman ini, pengajuan terkirim ke WhatsApp operator. Datang hanya saat surat siap diambil.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- TAB SWITCH -->
     <div class="flex justify-center mb-10">
       <div class="inline-flex bg-white rounded-xl border border-slate-200 p-1.5 shadow-sm">
-        <button @click="tab='ajukan'" :class="tab==='ajukan' ? 'bg-brand-700 text-white shadow' : 'text-slate-600 hover:bg-slate-50'" class="px-6 py-2.5 rounded-lg text-sm font-semibold transition">Ajukan Surat</button>
+        <button @click="tab='ajukan'" :class="tab!=='cek' ? 'bg-brand-700 text-white shadow' : 'text-slate-600 hover:bg-slate-50'" class="px-6 py-2.5 rounded-lg text-sm font-semibold transition">Ajukan Surat</button>
         <button @click="tab='cek'" :class="tab==='cek' ? 'bg-brand-700 text-white shadow' : 'text-slate-600 hover:bg-slate-50'" class="px-6 py-2.5 rounded-lg text-sm font-semibold transition">Cek Status</button>
       </div>
     </div>
 
-    <!-- ========= TAB AJUKAN ========= -->
+    <!-- ========= TAB AJUKAN: KATALOG ========= -->
     <div x-show="tab==='ajukan'">
-      <!-- HOW IT WORKS -->
-      <div class="grid sm:grid-cols-4 gap-4 mb-12">
-        <div class="text-center">
-          <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-extrabold flex items-center justify-center mx-auto mb-3">1</div>
-          <p class="text-sm font-semibold text-slate-800">Pilih Jenis Surat</p>
-          <p class="text-xs text-slate-400 mt-1">Tentukan surat yang dibutuhkan</p>
-        </div>
-        <div class="text-center">
-          <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-extrabold flex items-center justify-center mx-auto mb-3">2</div>
-          <p class="text-sm font-semibold text-slate-800">Isi Data & Unggah</p>
-          <p class="text-xs text-slate-400 mt-1">Lengkapi form & syarat dokumen</p>
-        </div>
-        <div class="text-center">
-          <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-extrabold flex items-center justify-center mx-auto mb-3">3</div>
-          <p class="text-sm font-semibold text-slate-800">Diverifikasi</p>
-          <p class="text-xs text-slate-400 mt-1">Operator desa memproses</p>
-        </div>
-        <div class="text-center">
-          <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-extrabold flex items-center justify-center mx-auto mb-3">4</div>
-          <p class="text-sm font-semibold text-slate-800">Notifikasi WA</p>
-          <p class="text-xs text-slate-400 mt-1">Ambil surat di kantor desa</p>
+      <div class="grid sm:grid-cols-4 gap-4 mb-10">
+        <template x-for="(s,i) in langkah" :key="i">
+          <div class="text-center">
+            <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-700 font-extrabold flex items-center justify-center mx-auto mb-3" x-text="i+1"></div>
+            <p class="text-sm font-semibold text-slate-800" x-text="s.j"></p>
+            <p class="text-xs text-slate-400 mt-1" x-text="s.d"></p>
+          </div>
+        </template>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 mb-6">
+        <input x-model="cari" type="search" placeholder="Cari layanan… contoh: usaha, nikah, bansos" class="flex-1 px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm bg-white" />
+        <div class="flex gap-2 flex-wrap">
+          <template x-for="k in kategori" :key="k">
+            <button @click="kat=k" :class="kat===k ? 'bg-brand-700 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-4 py-2 rounded-full text-xs font-semibold transition" x-text="k"></button>
+          </template>
         </div>
       </div>
 
-      <!-- LAYANAN GRID -->
-      <h2 class="text-xl font-bold text-slate-900 mb-5">Pilih Jenis Surat</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
-        <button @click="tab='form'" class="text-left bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition group">
-          <div class="flex items-start justify-between">
-            <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
-              <svg class="w-6 h-6 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-4">
+        <template x-for="l in tersaring" :key="l.id">
+          <button @click="pilih(l)" class="text-left bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition group">
+            <div class="flex items-start justify-between gap-2">
+              <span class="text-xs px-2 py-1 rounded-full bg-brand-50 text-brand-700 font-semibold" x-text="l.kat"></span>
+              <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-500" x-text="'±'+l.hari+' hari'"></span>
             </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-500">±1 hari</span>
-          </div>
-          <h3 class="font-bold text-slate-900 mt-4">Surat Keterangan Domisili</h3>
-          <p class="text-sm text-slate-500 mt-1">Bukti tempat tinggal di Desa Jatirokeh.</p>
-        </button>
-        <button @click="tab='form'" class="text-left bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition group">
-          <div class="flex items-start justify-between">
-            <div class="w-11 h-11 rounded-xl bg-sand-50 flex items-center justify-center group-hover:bg-sand-100 transition">
-              <svg class="w-6 h-6 text-sand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4z"/></svg>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-500">±2 hari</span>
-          </div>
-          <h3 class="font-bold text-slate-900 mt-4">Surat Keterangan Tidak Mampu</h3>
-          <p class="text-sm text-slate-500 mt-1">SKTM untuk keperluan bantuan/beasiswa.</p>
-        </button>
-        <button @click="tab='form'" class="text-left bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition group">
-          <div class="flex items-start justify-between">
-            <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
-              <svg class="w-6 h-6 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-500">±2 hari</span>
-          </div>
-          <h3 class="font-bold text-slate-900 mt-4">Surat Keterangan Usaha</h3>
-          <p class="text-sm text-slate-500 mt-1">Untuk pengajuan kredit usaha/UMKM.</p>
-        </button>
-        <button @click="tab='form'" class="text-left bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition group">
-          <div class="flex items-start justify-between">
-            <div class="w-11 h-11 rounded-xl bg-sand-50 flex items-center justify-center group-hover:bg-sand-100 transition">
-              <svg class="w-6 h-6 text-sand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0"/></svg>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-500">±1 hari</span>
-          </div>
-          <h3 class="font-bold text-slate-900 mt-4">Surat Pengantar KTP/KK</h3>
-          <p class="text-sm text-slate-500 mt-1">Pengantar untuk Dukcapil kabupaten.</p>
-        </button>
-        <button @click="tab='form'" class="text-left bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition group">
-          <div class="flex items-start justify-between">
-            <div class="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition">
-              <svg class="w-6 h-6 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/></svg>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-500">±1 hari</span>
-          </div>
-          <h3 class="font-bold text-slate-900 mt-4">Surat Keterangan Kelahiran</h3>
-          <p class="text-sm text-slate-500 mt-1">Keterangan kelahiran untuk akta.</p>
-        </button>
-        <button @click="tab='form'" class="text-left bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition group">
-          <div class="flex items-start justify-between">
-            <div class="w-11 h-11 rounded-xl bg-sand-50 flex items-center justify-center group-hover:bg-sand-100 transition">
-              <svg class="w-6 h-6 text-sand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            </div>
-            <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-500">±1 hari</span>
-          </div>
-          <h3 class="font-bold text-slate-900 mt-4">Surat Keterangan Kematian</h3>
-          <p class="text-sm text-slate-500 mt-1">Keterangan kematian untuk akta.</p>
-        </button>
+            <h3 class="font-bold text-slate-900 mt-3" x-text="l.nama"></h3>
+            <p class="text-sm text-slate-500 mt-1" x-text="l.desc"></p>
+            <p class="text-xs font-bold text-brand-700 mt-3">Biaya: GRATIS · Lihat syarat & ajukan →</p>
+          </button>
+        </template>
       </div>
+      <p x-show="tersaring.length===0" class="text-center text-sm text-slate-400 py-10">Tidak ditemukan. Coba kata kunci lain, atau tanya operator lewat WhatsApp.</p>
     </div>
 
     <!-- ========= TAB FORM ========= -->
@@ -185,75 +161,79 @@
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         Kembali ke daftar layanan
       </button>
-      <div class="grid lg:grid-cols-3 gap-8">
+      <div class="grid lg:grid-cols-3 gap-8" x-show="!sukses">
         <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-100 p-6 lg:p-8">
-          <h2 class="text-xl font-bold text-slate-900">Formulir Surat Keterangan Domisili</h2>
-          <p class="text-sm text-slate-400 mt-1 mb-6">Lengkapi data sesuai KTP. Tanda <span class="text-red-500">*</span> wajib diisi.</p>
-          <form class="space-y-5">
+          <h2 class="text-xl font-bold text-slate-900" x-text="'Formulir ' + (pilihan?.nama || '')"></h2>
+          <p class="text-sm text-slate-400 mt-1 mb-6">Lengkapi data sesuai KTP. Tanda <span class="text-red-500">*</span> wajib diisi. Pengajuan akan diteruskan ke WhatsApp operator desa.</p>
+          <form class="space-y-5" @submit.prevent="kirim()">
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-1.5">Nama Lengkap <span class="text-red-500">*</span></label>
-                <input type="text" placeholder="Sesuai KTP" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+                <input x-model="f.nama" required type="text" placeholder="Sesuai KTP" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
               </div>
               <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-1.5">NIK <span class="text-red-500">*</span></label>
-                <input type="text" placeholder="16 digit" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
-              </div>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Tempat Lahir <span class="text-red-500">*</span></label>
-                <input type="text" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Tanggal Lahir <span class="text-red-500">*</span></label>
-                <input type="date" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+                <input x-model="f.nik" required inputmode="numeric" pattern="[0-9]{16}" title="NIK harus 16 digit angka" placeholder="16 digit" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
               </div>
             </div>
             <div>
               <label class="block text-sm font-semibold text-slate-700 mb-1.5">Alamat (RT/RW, Dukuh) <span class="text-red-500">*</span></label>
-              <input type="text" placeholder="Contoh: RT 02 / RW 04, Dukuh Pagerayu" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+              <input x-model="f.alamat" required type="text" placeholder="Contoh: RT 02 / RW 04, Dukuh Pagerayu" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
             </div>
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-1.5">No. WhatsApp Aktif <span class="text-red-500">*</span></label>
-                <input type="tel" placeholder="08xxxxxxxxxx" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+                <input x-model="f.wa" required type="tel" placeholder="08xxxxxxxxxx" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
               </div>
               <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-1.5">Keperluan <span class="text-red-500">*</span></label>
-                <input type="text" placeholder="Contoh: Melamar pekerjaan" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+                <input x-model="f.perlu" required type="text" placeholder="Contoh: Melamar pekerjaan" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
               </div>
             </div>
-            <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Unggah Scan/Foto KTP <span class="text-red-500">*</span></label>
-              <div class="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-brand-300 transition cursor-pointer">
-                <svg class="w-8 h-8 text-slate-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                <p class="text-sm text-slate-500">Klik untuk unggah atau seret file ke sini</p>
-                <p class="text-xs text-slate-400 mt-1">JPG, PNG, atau PDF · maks. 2 MB</p>
-              </div>
+            <div x-show="pilihan?.detail">
+              <label class="block text-sm font-semibold text-slate-700 mb-1.5" x-text="pilihan?.detail + ' *'"></label>
+              <input x-model="f.detail" :required="!!pilihan?.detail" type="text" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
             </div>
+            <p class="text-xs text-slate-400">Foto/scan dokumen syarat tidak diunggah di sini — kirimkan lewat WhatsApp setelah menekan tombol di bawah, atau bawa saat pengambilan. Data Anda dilindungi sesuai UU Perlindungan Data Pribadi.</p>
             <div class="flex items-start gap-2.5">
-              <input type="checkbox" class="mt-1 w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+              <input x-model="f.setuju" required type="checkbox" class="mt-1 w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
               <label class="text-xs text-slate-500">Saya menyatakan data yang diisi benar dan menyetujui data digunakan untuk pemrosesan surat sesuai ketentuan perlindungan data pribadi.</label>
             </div>
-            <button type="button" class="w-full py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold shadow-lg shadow-brand-600/25 transition">Kirim Pengajuan</button>
+            <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold shadow-lg shadow-brand-600/25 transition">Buat Pengajuan & Kirim ke WhatsApp</button>
           </form>
         </div>
-        <!-- syarat -->
         <aside>
           <div class="bg-white rounded-2xl border border-slate-100 p-6 sticky top-28">
-            <h3 class="font-bold text-slate-900 mb-4">Syarat Dokumen</h3>
+            <h3 class="font-bold text-slate-900 mb-1">Syarat Dokumen</h3>
+            <p class="text-xs text-slate-400 mb-4">Centang yang sudah Anda siapkan:</p>
             <ul class="space-y-3 text-sm">
-              <li class="flex gap-2.5"><svg class="w-5 h-5 text-brand-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Scan/foto KTP yang masih berlaku</li>
-              <li class="flex gap-2.5"><svg class="w-5 h-5 text-brand-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Scan/foto Kartu Keluarga (KK)</li>
-              <li class="flex gap-2.5"><svg class="w-5 h-5 text-brand-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Nomor WhatsApp aktif</li>
+              <template x-for="(s,i) in (pilihan?.syarat || [])" :key="i">
+                <li>
+                  <label class="flex gap-2.5 cursor-pointer" :class="centang[i] ? 'text-slate-400 line-through' : 'text-slate-700'">
+                    <input type="checkbox" x-model="centang[i]" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+                    <span x-text="s"></span>
+                  </label>
+                </li>
+              </template>
             </ul>
             <div class="mt-5 p-4 rounded-xl bg-sand-50 border border-sand-100">
               <p class="text-xs text-sand-600 font-semibold mb-1">Estimasi selesai</p>
-              <p class="text-sm text-slate-700">1 hari kerja setelah verifikasi. Notifikasi dikirim via WhatsApp.</p>
+              <p class="text-sm text-slate-700"><span x-text="pilihan?.hari"></span> hari kerja setelah verifikasi · Biaya <strong>GRATIS</strong>. Notifikasi dikirim via WhatsApp.</p>
             </div>
           </div>
         </aside>
+      </div>
+
+      <!-- SUKSES -->
+      <div x-show="sukses" style="display:none" class="max-w-xl mx-auto bg-white rounded-2xl border border-brand-100 p-8 text-center">
+        <p class="text-4xl mb-3">✅</p>
+        <h2 class="text-xl font-bold text-slate-900">Pengajuan tercatat!</h2>
+        <p class="text-sm text-slate-500 mt-2">Simpan kode ini untuk cek status:</p>
+        <p class="text-3xl font-extrabold font-mono text-brand-700 my-4" x-text="sukses?.kode"></p>
+        <p class="text-sm text-slate-500">Satu langkah terakhir: kirim pengajuan ke operator desa lewat WhatsApp agar langsung diproses, dan lampirkan foto dokumen syarat Anda di chat tersebut.</p>
+        <!-- shortcut: nomor WA operator masih PLACEHOLDER 0812-0000-0000 karena nomor resmi belum ada — ganti angka di waLink() saat nomor operator tersedia. -->
+        <a :href="sukses?.wa" target="_blank" rel="noopener" class="block mt-6 py-3.5 rounded-xl bg-[#25D366] hover:brightness-95 text-white font-bold transition">Kirim via WhatsApp Sekarang</a>
+        <button @click="tab='cek'; sukses=null" class="mt-3 text-sm font-semibold text-slate-500 hover:text-brand-700">Cek status pengajuan saya →</button>
       </div>
     </div>
 
@@ -261,52 +241,125 @@
     <div x-show="tab==='cek'" style="display:none" class="max-w-xl mx-auto">
       <div class="bg-white rounded-2xl border border-slate-100 p-6 lg:p-8">
         <h2 class="text-xl font-bold text-slate-900">Cek Status Pengajuan</h2>
-        <p class="text-sm text-slate-400 mt-1 mb-6">Masukkan kode pengajuan yang Anda terima saat mendaftar.</p>
-        <div class="flex gap-3">
-          <input type="text" value="JTR-2026-0142" class="flex-1 px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm font-mono" />
+        <p class="text-sm text-slate-400 mt-1 mb-6">Masukkan kode pengajuan yang Anda terima saat mendaftar dari perangkat ini.</p>
+        <form class="flex gap-3" @submit.prevent="lacak()">
+          <input x-model="kodeCek" type="text" placeholder="Contoh: JTR-2026-1234" class="flex-1 px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm font-mono uppercase" />
           <button class="px-6 py-3 rounded-lg bg-brand-700 hover:bg-brand-800 text-white font-semibold text-sm transition">Lacak</button>
-        </div>
-
-        <!-- RESULT -->
-        <div class="mt-8 p-5 rounded-xl bg-slate-50 border border-slate-100">
-          <div class="flex items-center justify-between mb-1">
-            <p class="font-bold text-slate-900">Surat Keterangan Domisili</p>
-            <span class="px-2.5 py-1 rounded-full bg-sand-100 text-sand-600 text-xs font-bold">Diproses</span>
+        </form>
+        <div x-show="hasilCek === 'ada'" style="display:none" class="mt-8">
+          <div class="p-5 rounded-xl bg-slate-50 border border-slate-100">
+            <div class="flex items-center justify-between mb-1">
+              <p class="font-bold text-slate-900" x-text="ditemukan?.layanan"></p>
+              <span class="px-2.5 py-1 rounded-full bg-sand-100 text-sand-600 text-xs font-bold">Diterima</span>
+            </div>
+            <p class="text-xs text-slate-400" x-text="'Kode: ' + ditemukan?.kode + ' · a.n. ' + ditemukan?.nama + ' · ' + ditemukan?.tanggal"></p>
           </div>
-          <p class="text-xs text-slate-400">Kode: JTR-2026-0142 · a.n. Henky Pratama</p>
+          <ol class="mt-6 relative border-l-2 border-slate-100 ml-2 space-y-6">
+            <li class="ml-6">
+              <span class="absolute -left-[11px] w-5 h-5 rounded-full bg-brand-600 ring-4 ring-white flex items-center justify-center"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
+              <p class="text-sm font-semibold text-slate-800">Pengajuan diterima</p>
+              <p class="text-xs text-slate-400">Tercatat di perangkat Anda</p>
+            </li>
+            <li class="ml-6">
+              <span class="absolute -left-[11px] w-5 h-5 rounded-full bg-sand-500 ring-4 ring-white animate-pulse"></span>
+              <p class="text-sm font-semibold text-slate-800">Menunggu verifikasi operator</p>
+              <p class="text-xs text-slate-400">Pastikan pengajuan sudah terkirim via WhatsApp. Status lanjutan (diproses / siap diambil) dikirim operator lewat WhatsApp ke nomor Anda.</p>
+            </li>
+          </ol>
         </div>
-
-        <!-- TIMELINE -->
-        <ol class="mt-6 relative border-l-2 border-slate-100 ml-2 space-y-6">
-          <li class="ml-6">
-            <span class="absolute -left-[11px] w-5 h-5 rounded-full bg-brand-600 ring-4 ring-white flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-            </span>
-            <p class="text-sm font-semibold text-slate-800">Pengajuan diterima</p>
-            <p class="text-xs text-slate-400">18 Juni 2026, 09.14 WIB</p>
-          </li>
-          <li class="ml-6">
-            <span class="absolute -left-[11px] w-5 h-5 rounded-full bg-brand-600 ring-4 ring-white flex items-center justify-center">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-            </span>
-            <p class="text-sm font-semibold text-slate-800">Dokumen diverifikasi</p>
-            <p class="text-xs text-slate-400">18 Juni 2026, 13.20 WIB</p>
-          </li>
-          <li class="ml-6">
-            <span class="absolute -left-[11px] w-5 h-5 rounded-full bg-sand-500 ring-4 ring-white animate-pulse"></span>
-            <p class="text-sm font-semibold text-slate-800">Surat sedang dicetak & ditandatangani</p>
-            <p class="text-xs text-slate-400">Sedang berlangsung</p>
-          </li>
-          <li class="ml-6">
-            <span class="absolute -left-[11px] w-5 h-5 rounded-full bg-slate-200 ring-4 ring-white"></span>
-            <p class="text-sm font-semibold text-slate-400">Siap diambil di kantor desa</p>
-            <p class="text-xs text-slate-400">Menunggu</p>
-          </li>
-        </ol>
+        <p x-show="hasilCek === 'kosong'" style="display:none" class="mt-6 text-sm text-slate-500 bg-sand-50 border border-sand-100 rounded-xl p-4">Kode tidak ditemukan di perangkat ini. Pengajuan hanya tersimpan di perangkat yang dipakai saat mendaftar. Jika Anda mendaftar dari perangkat lain, tanyakan statusnya ke operator desa lewat WhatsApp dengan menyebut nama & jenis surat.</p>
       </div>
     </div>
+
+    <!-- ============ INFO & HAK WARGA ============ -->
+    <section class="mt-16">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="text-sm font-bold text-brand-600 uppercase tracking-wider">Bukan Surat, Tapi Penting</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">Info & Hak Warga Lainnya</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="https://cekbansos.kemensos.go.id" target="_blank" rel="noopener" class="bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition">
+          <p class="text-2xl mb-2">🎁</p>
+          <h3 class="font-bold text-slate-900 text-sm">Cek Penerima Bansos</h3>
+          <p class="text-xs text-slate-500 mt-1">Cek nama Anda di situs resmi Kemensos: BLT, PKH, dan BPNT/sembako. Cukup nama + wilayah.</p>
+        </a>
+        <button @click="pilih(layananData.find(l=>l.id==='bansos'))" class="text-left bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition">
+          <p class="text-2xl mb-2">📝</p>
+          <h3 class="font-bold text-slate-900 text-sm">Belum Terdaftar Bansos?</h3>
+          <p class="text-xs text-slate-500 mt-1">Ajukan pengusulan data DTKS lewat desa dengan layanan "Pengusulan Bansos / DTKS" di katalog atas.</p>
+        </button>
+        <a href="https://www.bpjs-kesehatan.go.id" target="_blank" rel="noopener" class="bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition">
+          <p class="text-2xl mb-2">🏥</p>
+          <h3 class="font-bold text-slate-900 text-sm">BPJS Kesehatan / KIS</h3>
+          <p class="text-xs text-slate-500 mt-1">Warga tidak mampu berhak atas KIS-PBI (iuran dibayar pemerintah). Pengusulannya lewat DTKS desa.</p>
+        </a>
+        <a href="berita.html" class="bg-white rounded-2xl border border-slate-100 p-5 hover:border-brand-300 hover:shadow-lg transition">
+          <p class="text-2xl mb-2">👶</p>
+          <h3 class="font-bold text-slate-900 text-sm">Posyandu & Kesehatan</h3>
+          <p class="text-xs text-slate-500 mt-1">Jadwal Posyandu balita, imunisasi, dan kelas ibu hamil diumumkan di halaman Berita & Pengumuman.</p>
+        </a>
+      </div>
+    </section>
   </main>
 
+  <script>
+    function layananApp() {
+      const WA_OPERATOR = '6281200000000'; // shortcut: placeholder — ganti dengan nomor WA resmi operator desa
+      const layananData = [
+        { id:'domisili', kat:'Kependudukan', nama:'Surat Keterangan Domisili', desc:'Bukti tempat tinggal di Desa Jatirokeh.', hari:1, syarat:['Scan/foto KTP yang masih berlaku','Scan/foto Kartu Keluarga (KK)','Nomor WhatsApp aktif'] },
+        { id:'ktp', kat:'Kependudukan', nama:'Surat Pengantar KTP-el', desc:'Pengantar perekaman/pencetakan KTP-el ke Dukcapil.', hari:1, detail:'Keperluan KTP (baru / hilang / rusak / perubahan data)', syarat:['Kartu Keluarga (KK) terbaru','Surat pengantar RT/RW setempat','KTP lama (untuk penggantian, bila ada)'] },
+        { id:'kk', kat:'Kependudukan', nama:'Surat Pengantar Kartu Keluarga', desc:'Pengantar pembuatan/perubahan KK ke Dukcapil.', hari:1, detail:'Perubahan KK (baru / tambah anggota / pisah KK)', syarat:['KK lama','KTP seluruh anggota keluarga','Buku nikah / akta cerai (bila relevan)','Akta kelahiran (untuk penambahan anak)'] },
+        { id:'lahir', kat:'Kependudukan', nama:'Surat Keterangan Kelahiran', desc:'Keterangan kelahiran sebagai dasar pembuatan akta kelahiran.', hari:1, detail:'Nama lengkap bayi', syarat:['Surat Keterangan Lahir dari RS/bidan/penolong','Kartu Keluarga (KK)','KTP kedua orang tua','Buku nikah / akta perkawinan orang tua'] },
+        { id:'mati', kat:'Kependudukan', nama:'Surat Keterangan Kematian', desc:'Keterangan kematian sebagai dasar pembuatan akta kematian.', hari:1, detail:'Nama lengkap yang meninggal', syarat:['KTP & KK yang meninggal','Surat keterangan dari RS atau RT/RW setempat','KTP pelapor (ahli waris)'] },
+        { id:'pindah', kat:'Kependudukan', nama:'Pengantar Pindah Datang', desc:'Pengantar SKPWNI untuk warga yang pindah masuk/keluar desa.', hari:2, detail:'Alamat tujuan / asal pindah', syarat:['KTP & KK dari daerah asal','Formulir F-1.06 / SKPWNI dari daerah asal (untuk pendatang)','Surat pengantar RT/RW tujuan'] },
+        { id:'sktm', kat:'Keterangan', nama:'Surat Keterangan Tidak Mampu', desc:'SKTM untuk keperluan bantuan, keringanan biaya, atau beasiswa.', hari:2, syarat:['KTP & KK','Surat pengantar RT/RW setempat'] },
+        { id:'usaha', kat:'Keterangan', nama:'Surat Keterangan Usaha (SKU)', desc:'Untuk pengajuan kredit usaha, KUR, dan keperluan UMKM.', hari:2, detail:'Nama & jenis usaha', syarat:['KTP & KK','Foto tempat/lapak usaha','Surat pengantar RT/RW setempat'] },
+        { id:'belum-nikah', kat:'Keterangan', nama:'Surat Keterangan Belum Menikah', desc:'Keterangan status lajang untuk lamaran kerja atau keperluan lain.', hari:1, syarat:['KTP & KK','Akta kelahiran'] },
+        { id:'penghasilan', kat:'Keterangan', nama:'Surat Keterangan Penghasilan', desc:'Keterangan penghasilan orang tua/wali, umumnya untuk beasiswa & kampus.', hari:1, detail:'Penghasilan per bulan (perkiraan jujur)', syarat:['KTP & KK','Surat pengantar RT/RW setempat'] },
+        { id:'ahli-waris', kat:'Keterangan', nama:'Surat Keterangan Ahli Waris', desc:'Menetapkan ahli waris untuk urusan waris, bank, dan tanah.', hari:3, detail:'Nama pewaris (yang meninggal)', syarat:['KTP seluruh ahli waris','Kartu Keluarga','Akta kematian pewaris','Buku nikah pewaris (bila ada)'] },
+        { id:'beda-nama', kat:'Keterangan', nama:'Surat Keterangan Beda Nama', desc:'Menyatakan dua nama berbeda adalah orang yang sama.', hari:1, detail:'Nama versi 1 & versi 2 yang berbeda', syarat:['KTP & KK','Dokumen yang memuat nama berbeda (ijazah / akta / sertifikat)'] },
+        { id:'tanah', kat:'Keterangan', nama:'Surat Keterangan Tanah Tidak Sengketa', desc:'Keterangan status tanah untuk jual-beli atau sertifikasi (termasuk PTSL).', hari:3, detail:'Lokasi & luas tanah', syarat:['KTP & KK pemilik','Bukti kepemilikan (sertifikat / Letter C / girik)','Surat pengantar RT/RW setempat'] },
+        { id:'skck', kat:'Keterangan', nama:'Surat Pengantar SKCK', desc:'Pengantar pembuatan SKCK di Polsek untuk lamaran kerja.', hari:1, syarat:['KTP & KK','Akta kelahiran','Pas foto 4x6 latar merah (siapkan untuk Polsek)'] },
+        { id:'keramaian', kat:'Keterangan', nama:'Surat Izin Keramaian', desc:'Pengantar izin acara hajatan/pertunjukan ke Polsek.', hari:2, detail:'Nama acara & tanggal pelaksanaan', syarat:['KTP penanggung jawab acara','Surat permohonan tertulis','Persetujuan RT/RW setempat'] },
+        { id:'nikah', kat:'Sosial & Nikah', nama:'Pengantar Nikah (N1–N4)', desc:'Berkas pengantar nikah dari desa untuk KUA.', hari:2, detail:'Nama calon pasangan', syarat:['KTP & KK kedua calon','Akta kelahiran kedua calon','Pas foto 2x3 & 4x6 latar biru','Surat pernyataan belum menikah / akta cerai / akta kematian pasangan terdahulu (bila relevan)'] },
+        { id:'bansos', kat:'Sosial & Nikah', nama:'Pengusulan Bansos / DTKS', desc:'Pengusulan masuk Data Terpadu (DTKS) — pintu ke BLT, PKH, BPNT, dan KIS-PBI.', hari:7, syarat:['KTP & KK','Foto rumah tampak depan','Foto kondisi dalam rumah'] },
+        { id:'duda-janda', kat:'Sosial & Nikah', nama:'Surat Keterangan Duda / Janda', desc:'Keterangan status duda/janda untuk administrasi dan pernikahan kembali.', hari:1, syarat:['KTP & KK','Akta cerai atau akta kematian pasangan'] },
+      ];
+      return {
+        layananData,
+        tab: 'ajukan', cari: '', kat: 'Semua',
+        kategori: ['Semua', 'Kependudukan', 'Keterangan', 'Sosial & Nikah'],
+        langkah: [
+          { j:'Pilih Jenis Surat', d:'Lihat syaratnya dulu di kartu layanan' },
+          { j:'Isi Form Sekali', d:'Data sesuai KTP, tanpa unggah rumit' },
+          { j:'Terkirim ke WhatsApp', d:'Operator menerima & memverifikasi' },
+          { j:'Ambil Saat Siap', d:'Notifikasi WA saat surat bisa diambil' },
+        ],
+        pilihan: null, centang: [], sukses: null,
+        f: { nama:'', nik:'', alamat:'', wa:'', perlu:'', detail:'', setuju:false },
+        kodeCek: '', hasilCek: '', ditemukan: null,
+        get tersaring() {
+          const q = this.cari.toLowerCase();
+          return this.layananData.filter(l => (this.kat==='Semua' || l.kat===this.kat) && (l.nama+' '+l.desc).toLowerCase().includes(q));
+        },
+        pilih(l) { if (!l) return; this.pilihan = l; this.centang = l.syarat.map(() => false); this.sukses = null; this.tab = 'form'; window.scrollTo({ top: 0, behavior: 'smooth' }); },
+        kirim() {
+          const kode = 'JTR-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+          const semua = JSON.parse(localStorage.getItem('pengajuanDesa') || '[]');
+          const rec = { kode, layanan: this.pilihan.nama, nama: this.f.nama, tanggal: new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' }) };
+          semua.push(rec); localStorage.setItem('pengajuanDesa', JSON.stringify(semua));
+          const teks = ['Halo Operator Desa Jatirokeh, saya mengajukan surat online:', '', 'Jenis: ' + this.pilihan.nama, 'Kode: ' + kode, 'Nama: ' + this.f.nama, 'NIK: ' + this.f.nik, 'Alamat: ' + this.f.alamat, 'Keperluan: ' + this.f.perlu, this.f.detail ? (this.pilihan.detail + ': ' + this.f.detail) : '', '', 'Foto dokumen syarat saya lampirkan menyusul di chat ini. Terima kasih.'].filter(Boolean).join('\n');
+          this.sukses = { kode, wa: 'https://wa.me/' + WA_OPERATOR + '?text=' + encodeURIComponent(teks) };
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        },
+        lacak() {
+          const semua = JSON.parse(localStorage.getItem('pengajuanDesa') || '[]');
+          this.ditemukan = semua.find(r => r.kode === this.kodeCek.trim().toUpperCase()) || null;
+          this.hasilCek = this.ditemukan ? 'ada' : 'kosong';
+        }
+      };
+    }
+  </script>
   <footer class="bg-slate-900 text-slate-400 mt-10">
     <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
