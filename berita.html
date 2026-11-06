@@ -77,17 +77,17 @@
     </div>
   </section>
 
-  <main class="max-w-7xl mx-auto px-4 py-10 lg:py-14" x-data="{ cat:'Semua' }">
+  <main class="max-w-7xl mx-auto px-4 py-10 lg:py-14" x-data="beritaApp()">
 
     <!-- SEARCH + FILTER -->
     <div class="flex flex-col lg:flex-row gap-4 mb-8">
       <div class="relative flex-1">
         <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        <input type="text" placeholder="Cari berita atau pengumuman..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+        <input x-model="cari" type="search" placeholder="Cari berita atau pengumuman..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm bg-white" />
       </div>
       <div class="flex flex-wrap gap-2">
-        <template x-for="c in ['Semua','Pembangunan','Pemerintahan','Pertanian','Sosial','Keagamaan']">
-          <button @click="cat=c" :class="cat===c ? 'bg-brand-700 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:border-brand-300'" class="px-4 py-2 rounded-lg text-sm font-semibold transition" x-text="c"></button>
+        <template x-for="k in kategori" :key="k">
+          <button @click="kat=k" :class="kat===k ? 'bg-brand-700 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:border-brand-300'" class="px-4 py-2 rounded-lg text-sm font-semibold transition" x-text="k"></button>
         </template>
       </div>
     </div>
@@ -95,92 +95,25 @@
     <div class="grid lg:grid-cols-3 gap-8">
       <!-- ARTICLES -->
       <div class="lg:col-span-2">
-        <!-- FEATURED -->
-        <a href="berita-detail.html" class="group block mb-8">
-          <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition">
-            <div class="relative aspect-[16/9] overflow-hidden">
-              <img src="https://picsum.photos/seed/panenbawang/900/500" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
-              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-700 text-white text-xs font-semibold">Pertanian</span>
-              <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold">Headline</span>
-            </div>
-            <div class="p-6">
-              <div class="flex items-center gap-3 text-xs text-slate-400 mb-2">
-                <span>18 Juni 2026</span><span>·</span><span>Admin Desa</span>
-              </div>
-              <h2 class="text-xl font-extrabold text-slate-900 group-hover:text-brand-700 transition leading-snug">Panen Raya Bawang Merah, Harga Stabil di Pasar Jatirokeh</h2>
-              <p class="text-sm text-slate-500 mt-2 line-clamp-2">Petani Jatirokeh menikmati hasil panen melimpah musim ini berkat program perbaikan irigasi desa yang didanai APBDes 2025. Hasil panen diserap langsung oleh tengkulak lokal dengan harga yang menguntungkan...</p>
-            </div>
-          </article>
-        </a>
-
-        <!-- GRID -->
         <div class="grid sm:grid-cols-2 gap-6">
-          <a href="berita-detail.html" class="group">
-            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
-              <div class="relative aspect-[16/10] overflow-hidden">
-                <img src="https://picsum.photos/seed/jalandesa/600/400" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
-                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-700 text-white text-xs font-semibold">Pembangunan</span>
-              </div>
-              <div class="p-5">
-                <p class="text-xs text-slate-400">10 Juni 2026</p>
-                <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug">Betonisasi Jalan Dukuh Pagerayu Rampung 100%</h3>
-                <p class="text-sm text-slate-500 mt-2 line-clamp-2">Akses warga menuju area persawahan kini lebih lancar dan tahan lama...</p>
-              </div>
-            </article>
-          </a>
-          <a href="berita-detail.html" class="group">
-            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
-              <div class="relative aspect-[16/10] overflow-hidden">
-                <img src="https://picsum.photos/seed/posyandu/600/400" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
-                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold">Sosial</span>
-              </div>
-              <div class="p-5">
-                <p class="text-xs text-slate-400">15 Juni 2026</p>
-                <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug">Posyandu Balita Digelar Serentak di 8 RW</h3>
-                <p class="text-sm text-slate-500 mt-2 line-clamp-2">Pemeriksaan gizi dan imunisasi gratis bagi seluruh balita desa...</p>
-              </div>
-            </article>
-          </a>
-          <a href="berita-detail.html" class="group">
-            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
-              <div class="relative aspect-[16/10] overflow-hidden">
-                <img src="https://picsum.photos/seed/ponpes/600/400" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
-                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-600 text-white text-xs font-semibold">Keagamaan</span>
-              </div>
-              <div class="p-5">
-                <p class="text-xs text-slate-400">8 Juni 2026</p>
-                <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug">Ponpes Al-Falah Gelar Haul Akbar & Khataman</h3>
-                <p class="text-sm text-slate-500 mt-2 line-clamp-2">Ribuan santri dan alumni hadir dalam acara tahunan pondok pesantren...</p>
-              </div>
-            </article>
-          </a>
-          <a href="berita-detail.html" class="group">
-            <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
-              <div class="relative aspect-[16/10] overflow-hidden">
-                <img src="https://picsum.photos/seed/musdes/600/400" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
-                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-600 text-white text-xs font-semibold">Pemerintahan</span>
-              </div>
-              <div class="p-5">
-                <p class="text-xs text-slate-400">5 Juni 2026</p>
-                <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug">Musdes Bahas Prioritas Pembangunan 2027</h3>
-                <p class="text-sm text-slate-500 mt-2 line-clamp-2">Warga dan BPD bersama menyusun rencana kerja pemerintah desa...</p>
-              </div>
-            </article>
-          </a>
+          <template x-for="(b,i) in tersaring" :key="b.id">
+            <a :href="'berita-detail.html?id=' + b.id" class="group" :class="i===0 && cari==='' && kat==='Semua' ? 'sm:col-span-2' : ''">
+              <article class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition h-full">
+                <div class="relative overflow-hidden" :class="i===0 && cari==='' && kat==='Semua' ? 'aspect-[16/9]' : 'aspect-[16/10]'">
+                  <img :src="'https://picsum.photos/seed/' + b.seed + '/900/500'" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="" />
+                  <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-700 text-white text-xs font-semibold" x-text="b.kat"></span>
+                  <span x-show="i===0 && cari==='' && kat==='Semua'" class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold">Headline</span>
+                </div>
+                <div class="p-5">
+                  <p class="text-xs text-slate-400"><span x-text="b.tanggal"></span> · Admin Desa</p>
+                  <h3 class="font-bold text-slate-900 mt-1.5 group-hover:text-brand-700 transition leading-snug" :class="i===0 && cari==='' && kat==='Semua' ? 'text-xl font-extrabold' : ''" x-text="b.judul"></h3>
+                  <p class="text-sm text-slate-500 mt-2 line-clamp-2" x-text="b.ringkasan"></p>
+                </div>
+              </article>
+            </a>
+          </template>
         </div>
-
-        <!-- PAGINATION -->
-        <div class="flex items-center justify-center gap-2 mt-10">
-          <button class="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button class="w-10 h-10 rounded-lg bg-brand-700 text-white font-semibold">1</button>
-          <button class="w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:bg-white font-semibold">2</button>
-          <button class="w-10 h-10 rounded-lg border border-slate-200 text-slate-600 hover:bg-white font-semibold">3</button>
-          <button class="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-white">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
+        <p x-show="tersaring.length===0" class="text-center text-sm text-slate-400 py-10">Berita tidak ditemukan. Coba kata kunci atau kategori lain.</p>
       </div>
 
       <!-- SIDEBAR -->
@@ -213,18 +146,12 @@
         <div class="bg-white rounded-2xl border border-slate-100 p-6">
           <h3 class="font-bold text-slate-900 mb-5">Terpopuler</h3>
           <div class="space-y-4">
-            <a href="berita-detail.html" class="flex gap-3 group">
-              <span class="text-2xl font-extrabold text-slate-200 leading-none">01</span>
-              <p class="text-sm font-semibold text-slate-700 group-hover:text-brand-700 leading-snug transition">Cara Mengurus SKTM Online Lewat Website Desa</p>
-            </a>
-            <a href="berita-detail.html" class="flex gap-3 group">
-              <span class="text-2xl font-extrabold text-slate-200 leading-none">02</span>
-              <p class="text-sm font-semibold text-slate-700 group-hover:text-brand-700 leading-snug transition">Realisasi Dana Desa 2025 Tembus 68%</p>
-            </a>
-            <a href="berita-detail.html" class="flex gap-3 group">
-              <span class="text-2xl font-extrabold text-slate-200 leading-none">03</span>
-              <p class="text-sm font-semibold text-slate-700 group-hover:text-brand-700 leading-snug transition">Profil Lengkap Perangkat Desa Jatirokeh 2026</p>
-            </a>
+            <template x-for="(b,i) in beritaData.slice(0,3)" :key="b.id">
+              <a :href="'berita-detail.html?id=' + b.id" class="flex gap-3 group">
+                <span class="text-2xl font-extrabold text-slate-200 leading-none" x-text="'0' + (i+1)"></span>
+                <p class="text-sm font-semibold text-slate-700 group-hover:text-brand-700 leading-snug transition" x-text="b.judul"></p>
+              </a>
+            </template>
           </div>
         </div>
 
@@ -232,7 +159,8 @@
         <div class="bg-gradient-to-br from-brand-700 to-brand-800 rounded-2xl p-6 text-white">
           <h3 class="font-bold text-lg">Dapatkan kabar via WhatsApp</h3>
           <p class="text-sm text-brand-100/80 mt-1.5">Gabung grup info desa dan jangan ketinggalan pengumuman penting.</p>
-          <a href="#" class="mt-4 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white text-brand-700 font-semibold text-sm hover:bg-sand-50 transition">
+          <!-- shortcut: nomor WA masih PLACEHOLDER 0812-0000-0000 — ganti dengan nomor/grup WA resmi desa saat tersedia -->
+          <a href="https://wa.me/6281200000000" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white text-brand-700 font-semibold text-sm hover:bg-sand-50 transition">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
             Gabung Sekarang
           </a>
@@ -240,6 +168,26 @@
       </aside>
     </div>
   </main>
+
+  <script>
+    function beritaApp() {
+      const beritaData = [
+        { id:'panen-raya-bawang-merah', kat:'Pertanian', tanggal:'18 Juni 2026', seed:'panenbawang', judul:'Panen Raya Bawang Merah, Harga Stabil di Pasar Jatirokeh', ringkasan:'Petani Jatirokeh menikmati hasil panen melimpah musim ini berkat program perbaikan irigasi desa yang didanai APBDes 2025. Hasil panen diserap langsung oleh tengkulak lokal dengan harga yang menguntungkan.' },
+        { id:'posyandu-balita-8-rw', kat:'Sosial', tanggal:'15 Juni 2026', seed:'posyandu', judul:'Posyandu Balita Digelar Serentak di 8 RW', ringkasan:'Pemeriksaan gizi dan imunisasi gratis bagi seluruh balita desa.' },
+        { id:'betonisasi-jalan-pagerayu', kat:'Pembangunan', tanggal:'10 Juni 2026', seed:'jalandesa', judul:'Betonisasi Jalan Dukuh Pagerayu Rampung 100%', ringkasan:'Akses warga menuju area persawahan kini lebih lancar dan tahan lama.' },
+        { id:'ponpes-al-falah-haul', kat:'Keagamaan', tanggal:'8 Juni 2026', seed:'ponpes', judul:'Ponpes Al-Falah Gelar Haul Akbar & Khataman', ringkasan:'Ribuan santri dan alumni hadir dalam acara tahunan pondok pesantren.' },
+        { id:'musdes-prioritas-2027', kat:'Pemerintahan', tanggal:'5 Juni 2026', seed:'musdes', judul:'Musdes Bahas Prioritas Pembangunan 2027', ringkasan:'Warga dan BPD bersama menyusun rencana kerja pemerintah desa.' },
+      ];
+      return {
+        beritaData, cari: '', kat: 'Semua',
+        kategori: ['Semua', 'Pembangunan', 'Pemerintahan', 'Pertanian', 'Sosial', 'Keagamaan'],
+        get tersaring() {
+          const q = this.cari.toLowerCase();
+          return this.beritaData.filter(b => (this.kat === 'Semua' || b.kat === this.kat) && (b.judul + ' ' + b.ringkasan).toLowerCase().includes(q));
+        }
+      };
+    }
+  </script>
 
   <footer class="bg-slate-900 text-slate-400 mt-10">
     <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
