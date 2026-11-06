@@ -16,11 +16,15 @@
         sand: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',400:'#fbbf24',500:'#f59e0b',600:'#d97706' } },
       fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] } } } }
   </script>
+  <script>
+    // Guard sesi admin — halaman login menulis localStorage 'adminDesa' = '1'
+    if (localStorage.getItem('adminDesa') !== '1') location.replace('admin-login.html');
+  </script>
 </head>
-<body class="font-sans antialiased bg-slate-100 text-slate-700" x-data="{ sidebar:false, tab:'realisasi' }">
+<body class="font-sans antialiased bg-slate-100 text-slate-700" x-data="adminApbdesApp()">
 <div class="flex min-h-screen">
 
-  <!-- SIDEBAR -->
+  <!-- ============ SIDEBAR ============ -->
   <aside class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-brand-900 text-brand-100 flex flex-col transition-transform lg:translate-x-0"
          :class="sidebar ? 'translate-x-0' : '-translate-x-full'">
     <div class="h-16 flex items-center gap-3 px-5 border-b border-white/10">
@@ -35,40 +39,23 @@
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
         Dashboard
       </a>
-      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Transparansi</p>
+      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Kelola</p>
       <a href="admin-apbdes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white font-semibold">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
         APBDes & Kegiatan
       </a>
-      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Konten</p>
-      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2zM12 8h.01M12 12h.01M12 16h.01"/></svg>
-        Berita & Pengumuman
+      <a href="admin-surat.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Layanan Surat
       </a>
-      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        Galeri
-      </a>
-      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Pelayanan</p>
-      <a href="admin-surat.html" class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
-        <span class="flex items-center gap-3">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          Layanan Surat
-        </span>
-        <span class="px-2 py-0.5 rounded-full bg-sand-500 text-white text-[10px] font-bold">5</span>
-      </a>
-      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.3-3.9C3.5 15 3 13.5 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-        Aspirasi & Aduan
-      </a>
-      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Data Desa</p>
-      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4z"/></svg>
-        Statistik & Profil
-      </a>
+      <p class="px-3 pt-3 pb-1 text-[10px] uppercase tracking-wider text-brand-400 font-bold">Situs Publik</p>
+      <a href="index.html" target="_blank" rel="noopener" class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/10 transition"><span>Beranda</span><span class="text-brand-300 text-xs">↗</span></a>
+      <a href="layanan.html" target="_blank" rel="noopener" class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/10 transition"><span>Layanan Surat</span><span class="text-brand-300 text-xs">↗</span></a>
+      <a href="transparansi.html" target="_blank" rel="noopener" class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/10 transition"><span>Transparansi</span><span class="text-brand-300 text-xs">↗</span></a>
+      <a href="berita.html" target="_blank" rel="noopener" class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/10 transition"><span>Berita</span><span class="text-brand-300 text-xs">↗</span></a>
     </nav>
     <div class="p-3 border-t border-white/10">
-      <a href="admin-login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition text-sm">
+      <a href="admin-login.html" onclick="localStorage.removeItem('adminDesa')" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition text-sm">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
         Keluar
       </a>
@@ -76,7 +63,7 @@
   </aside>
   <div x-show="sidebar" @click="sidebar=false" class="fixed inset-0 bg-black/40 z-40 lg:hidden" style="display:none"></div>
 
-  <!-- MAIN -->
+  <!-- ============ MAIN ============ -->
   <div class="flex-1 flex flex-col min-w-0">
     <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
       <div class="flex items-center gap-3">
@@ -85,10 +72,11 @@
         </button>
         <div>
           <h1 class="font-bold text-slate-900">APBDes & Kegiatan</h1>
-          <p class="text-xs text-slate-400 hidden sm:block">Tahun Anggaran 2025</p>
+          <p class="text-xs text-slate-400 hidden sm:block">Editor data Tahun Anggaran <span x-text="tahun"></span></p>
         </div>
       </div>
       <div class="flex items-center gap-2.5">
+        <span class="hidden sm:inline-block px-2.5 py-1 rounded-full text-[11px] font-bold" :class="pakaiOverride ? 'bg-sand-100 text-sand-600' : 'bg-slate-100 text-slate-500'" x-text="pakaiOverride ? 'Data terbitan admin aktif' : 'Menampilkan data bawaan'"></span>
         <div class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-sm">RZ</div>
         <div class="hidden sm:block leading-tight">
           <p class="text-sm font-semibold text-slate-800">Rizal</p>
@@ -98,190 +86,242 @@
     </header>
 
     <main class="flex-1 p-4 lg:p-6 space-y-6">
-
-      <!-- TABS -->
-      <div class="flex gap-1 bg-white rounded-xl border border-slate-200 p-1.5 w-fit">
-        <button @click="tab='realisasi'" :class="tab==='realisasi' ? 'bg-brand-700 text-white shadow' : 'text-slate-600 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-sm font-semibold transition">Anggaran & Realisasi</button>
-        <button @click="tab='kegiatan'" :class="tab==='kegiatan' ? 'bg-brand-700 text-white shadow' : 'text-slate-600 hover:bg-slate-50'" class="px-4 py-2 rounded-lg text-sm font-semibold transition">Bukti Kegiatan</button>
+      <!-- BANNER MODE PROTOTIPE -->
+      <div class="p-4 rounded-xl bg-sand-50 border border-sand-100 text-sm text-sand-600">
+        <strong>Mode prototipe:</strong> menekan <strong>Simpan & Terbitkan</strong> menulis data ke penyimpanan lokal perangkat/browser ini (<span class="font-mono text-xs">apbdesDesa</span>), dan halaman <a href="transparansi.html" target="_blank" rel="noopener" class="font-semibold underline">Transparansi publik</a> di perangkat yang sama langsung menampilkan data tersebut. Publikasi ke semua warga menunggu backend.
       </div>
 
-      <!-- ====== TAB REALISASI ====== -->
-      <div x-show="tab==='realisasi'" class="space-y-6">
-        <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-6 border-b border-slate-100">
-            <div>
-              <h2 class="font-bold text-slate-900">Rincian Belanja & Realisasi</h2>
-              <p class="text-xs text-slate-400 mt-0.5">Perbarui nilai realisasi tiap kegiatan. Perubahan tercatat di log audit.</p>
-            </div>
-            <button class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold transition">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              Tambah Kegiatan
-            </button>
+      <!-- KONFIRMASI SIMPAN -->
+      <div x-show="tersimpan" style="display:none" class="p-4 rounded-xl bg-brand-50 border border-brand-100 text-sm text-brand-800 flex flex-col sm:flex-row sm:items-center gap-2 justify-between">
+        <span>✅ <strong>Tersimpan</strong> — halaman Transparansi publik kini menampilkan data ini di perangkat ini.</span>
+        <a href="transparansi.html" target="_blank" rel="noopener" class="font-bold text-brand-700 hover:underline shrink-0">Buka Transparansi ↗</a>
+      </div>
+
+      <!-- RINGKASAN LIVE -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl border border-slate-100 p-5">
+          <p class="text-xs text-slate-400">Total Pendapatan</p>
+          <p class="text-lg lg:text-xl font-extrabold text-slate-900 mt-1" x-text="rp(d.pendapatan || 0)"></p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-5">
+          <p class="text-xs text-slate-400">Total Anggaran Bidang</p>
+          <p class="text-lg lg:text-xl font-extrabold text-slate-900 mt-1" x-text="rp(totalAnggaranBidang)"></p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-5">
+          <p class="text-xs text-slate-400">Total Realisasi Bidang</p>
+          <p class="text-lg lg:text-xl font-extrabold text-slate-900 mt-1" x-text="rp(totalRealisasiBidang)"></p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-5">
+          <p class="text-xs text-slate-400">Realisasi Bidang</p>
+          <p class="text-lg lg:text-xl font-extrabold text-brand-700 mt-1" x-text="persen(totalRealisasiBidang, totalAnggaranBidang) + '%'"></p>
+          <div class="h-2 rounded-full bg-slate-100 mt-2 overflow-hidden"><div class="h-full bg-brand-500 rounded-full transition-all" :style="'width:' + Math.min(100, persen(totalRealisasiBidang, totalAnggaranBidang)) + '%'"></div></div>
+        </div>
+      </div>
+
+      <!-- ANGKA UTAMA -->
+      <div class="bg-white rounded-2xl border border-slate-100 p-6">
+        <h2 class="font-bold text-slate-900">Angka Utama APBDes <span x-text="tahun"></span></h2>
+        <p class="text-xs text-slate-400 mt-0.5 mb-5">Isi angka penuh dalam rupiah (tanpa titik/koma), contoh: 2840000000.</p>
+        <div class="grid sm:grid-cols-3 gap-5">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Total Pendapatan (Rp)</label>
+            <input x-model.number="d.pendapatan" type="number" min="0" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
           </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="bg-slate-50 text-left text-slate-500 text-xs uppercase tracking-wider">
-                  <th class="px-6 py-3 font-semibold">Kegiatan</th>
-                  <th class="px-6 py-3 font-semibold text-right">Anggaran (Rp)</th>
-                  <th class="px-6 py-3 font-semibold text-right">Realisasi (Rp)</th>
-                  <th class="px-6 py-3 font-semibold text-center">Fisik</th>
-                  <th class="px-6 py-3 font-semibold text-center">Aksi</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="hover:bg-slate-50/50">
-                  <td class="px-6 py-3 font-medium text-slate-700">Betonisasi Jalan Pagerayu</td>
-                  <td class="px-6 py-3 text-right text-slate-500">420.000.000</td>
-                  <td class="px-6 py-3">
-                    <input type="text" value="420.000.000" class="w-36 px-3 py-1.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm text-right" />
-                  </td>
-                  <td class="px-6 py-3">
-                    <div class="flex items-center gap-2">
-                      <input type="range" min="0" max="100" value="100" class="w-20 accent-brand-600" />
-                      <span class="text-xs font-semibold text-slate-600 w-9">100%</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-3 text-center">
-                    <button class="p-1.5 rounded-lg text-brand-700 hover:bg-brand-50" title="Simpan">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-slate-50/50">
-                  <td class="px-6 py-3 font-medium text-slate-700">Rehab Saluran Irigasi</td>
-                  <td class="px-6 py-3 text-right text-slate-500">285.000.000</td>
-                  <td class="px-6 py-3">
-                    <input type="text" value="270.000.000" class="w-36 px-3 py-1.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm text-right" />
-                  </td>
-                  <td class="px-6 py-3">
-                    <div class="flex items-center gap-2">
-                      <input type="range" min="0" max="100" value="85" class="w-20 accent-brand-600" />
-                      <span class="text-xs font-semibold text-slate-600 w-9">85%</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-3 text-center">
-                    <button class="p-1.5 rounded-lg text-brand-700 hover:bg-brand-50" title="Simpan">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-slate-50/50">
-                  <td class="px-6 py-3 font-medium text-slate-700">BLT Dana Desa</td>
-                  <td class="px-6 py-3 text-right text-slate-500">288.000.000</td>
-                  <td class="px-6 py-3">
-                    <input type="text" value="192.000.000" class="w-36 px-3 py-1.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm text-right" />
-                  </td>
-                  <td class="px-6 py-3">
-                    <div class="flex items-center gap-2">
-                      <input type="range" min="0" max="100" value="67" class="w-20 accent-brand-600" />
-                      <span class="text-xs font-semibold text-slate-600 w-9">67%</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-3 text-center">
-                    <button class="p-1.5 rounded-lg text-brand-700 hover:bg-brand-50" title="Simpan">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Total Belanja (Rp)</label>
+            <input x-model.number="d.belanja" type="number" min="0" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
           </div>
-          <div class="flex items-center justify-between p-4 bg-slate-50 border-t border-slate-100 text-xs text-slate-500">
-            <span>Terakhir disimpan oleh <strong class="text-slate-700">Rizal</strong> · 12 Jun 2026, 14:20</span>
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-brand-500"></span>Tersinkron ke halaman publik</span>
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Pembiayaan / SiLPA (Rp)</label>
+            <input x-model.number="d.pembiayaan" type="number" min="0" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
+            <input x-model="d.pembiayaanKet" type="text" placeholder="Keterangan pembiayaan" class="w-full mt-2 px-4 py-2 rounded-lg border border-slate-200 focus:border-brand-400 outline-none text-xs" />
           </div>
         </div>
+        <p class="text-xs text-slate-400 mt-4">Rincian sumber pendapatan (<span x-text="d.sumber.length"></span> sumber) tersimpan utuh dan tampil di halaman publik; pengeditannya menyusul di backend.</p>
+        <ul class="mt-2 flex flex-wrap gap-2">
+          <template x-for="s in d.sumber" :key="s.nama">
+            <li class="px-3 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-xs text-slate-600"><span x-text="s.nama"></span> · <strong x-text="rp(s.nilai)"></strong></li>
+          </template>
+        </ul>
+      </div>
 
-        <!-- UPLOAD DOKUMEN -->
+      <!-- TABEL BIDANG -->
+      <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+        <div class="p-6 border-b border-slate-100">
+          <h2 class="font-bold text-slate-900">Belanja per Bidang</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Nama, anggaran, dan realisasi tiap bidang — persen & ringkasan di atas terhitung otomatis.</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm min-w-[640px]">
+            <thead>
+              <tr class="bg-slate-50 text-left text-slate-500 text-xs uppercase tracking-wider">
+                <th class="px-6 py-3 font-semibold">Bidang</th>
+                <th class="px-6 py-3 font-semibold text-right">Anggaran (Rp)</th>
+                <th class="px-6 py-3 font-semibold text-right">Realisasi (Rp)</th>
+                <th class="px-6 py-3 font-semibold text-center">%</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <template x-for="(b, i) in d.bidang" :key="i">
+                <tr>
+                  <td class="px-6 py-3"><input x-model="b.nama" type="text" class="w-full min-w-52 px-3 py-2 rounded-lg border border-slate-200 focus:border-brand-400 outline-none text-sm" /></td>
+                  <td class="px-6 py-3"><input x-model.number="b.anggaran" type="number" min="0" class="w-40 px-3 py-2 rounded-lg border border-slate-200 focus:border-brand-400 outline-none text-sm text-right" /></td>
+                  <td class="px-6 py-3"><input x-model.number="b.realisasi" type="number" min="0" class="w-40 px-3 py-2 rounded-lg border border-slate-200 focus:border-brand-400 outline-none text-sm text-right" /></td>
+                  <td class="px-6 py-3 text-center font-bold text-brand-700" x-text="persen(b.realisasi || 0, b.anggaran || 0) + '%'"></td>
+                </tr>
+              </template>
+            </tbody>
+            <tfoot>
+              <tr class="bg-slate-50 font-bold text-slate-800">
+                <td class="px-6 py-3">Total Bidang</td>
+                <td class="px-6 py-3 text-right" x-text="rp(totalAnggaranBidang)"></td>
+                <td class="px-6 py-3 text-right" x-text="rp(totalRealisasiBidang)"></td>
+                <td class="px-6 py-3 text-center text-brand-700" x-text="persen(totalRealisasiBidang, totalAnggaranBidang) + '%'"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABEL KEGIATAN -->
+      <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+        <div class="p-6 border-b border-slate-100">
+          <h2 class="font-bold text-slate-900">Rincian Kegiatan</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Kegiatan yang tampil di tabel rincian halaman Transparansi publik.</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm min-w-[640px]">
+            <thead>
+              <tr class="bg-slate-50 text-left text-slate-500 text-xs uppercase tracking-wider">
+                <th class="px-6 py-3 font-semibold">Kegiatan</th>
+                <th class="px-6 py-3 font-semibold text-right">Anggaran (Rp)</th>
+                <th class="px-6 py-3 font-semibold text-right">Realisasi (Rp)</th>
+                <th class="px-6 py-3 font-semibold text-center">%</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <template x-for="(k, i) in d.kegiatan" :key="i">
+                <tr>
+                  <td class="px-6 py-3"><input x-model="k.nama" type="text" class="w-full min-w-52 px-3 py-2 rounded-lg border border-slate-200 focus:border-brand-400 outline-none text-sm" /></td>
+                  <td class="px-6 py-3"><input x-model.number="k.anggaran" type="number" min="0" class="w-40 px-3 py-2 rounded-lg border border-slate-200 focus:border-brand-400 outline-none text-sm text-right" /></td>
+                  <td class="px-6 py-3"><input x-model.number="k.realisasi" type="number" min="0" class="w-40 px-3 py-2 rounded-lg border border-slate-200 focus:border-brand-400 outline-none text-sm text-right" /></td>
+                  <td class="px-6 py-3 text-center font-bold text-brand-700" x-text="persen(k.realisasi || 0, k.anggaran || 0) + '%'"></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DOKUMEN & BUKTI (TAMPILAN SAJA) -->
+      <div class="grid lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-2xl border border-slate-100 p-6">
-          <h2 class="font-bold text-slate-900 mb-1">Dokumen Resmi APBDes</h2>
-          <p class="text-xs text-slate-400 mb-4">Unggah Perdes APBDes & laporan realisasi (PDF) untuk diunduh publik.</p>
-          <div class="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-brand-300 transition cursor-pointer">
-            <svg class="w-8 h-8 text-slate-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-            <p class="text-sm text-slate-500">Seret file PDF ke sini atau klik untuk unggah</p>
-          </div>
+          <h2 class="font-bold text-slate-900">Dokumen Resmi</h2>
+          <p class="text-xs text-slate-400 mt-0.5 mb-4">Tampilan saat ini di halaman publik. Pengelolaan dokumen (unggah/ganti file) menyusul di backend — tidak ada unggahan yang tersimpan dari halaman ini.</p>
+          <ul class="space-y-2.5">
+            <template x-for="dok in d.dokumen" :key="dok.nama">
+              <li class="flex items-center justify-between gap-3 p-3 rounded-xl border border-slate-100">
+                <span class="text-sm font-medium text-slate-700" x-text="dok.nama"></span>
+                <span class="text-xs text-slate-400 shrink-0" x-text="dok.ket"></span>
+              </li>
+            </template>
+          </ul>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-100 p-6">
+          <h2 class="font-bold text-slate-900">Bukti Kegiatan (Foto)</h2>
+          <p class="text-xs text-slate-400 mt-0.5 mb-4">Tampilan saat ini di halaman publik. Pengelolaan foto before/after menyusul di backend.</p>
+          <ul class="space-y-2.5">
+            <template x-for="b in d.bukti" :key="b.nama">
+              <li class="flex items-center justify-between gap-3 p-3 rounded-xl border border-slate-100">
+                <span class="text-sm font-medium text-slate-700" x-text="b.nama"></span>
+                <span class="px-2.5 py-1 rounded-full text-xs font-bold shrink-0" :class="b.selesai ? 'bg-brand-100 text-brand-700' : 'bg-sand-100 text-sand-600'" x-text="b.status + ' · Fisik ' + b.fisik + '%'"></span>
+              </li>
+            </template>
+          </ul>
         </div>
       </div>
 
-      <!-- ====== TAB KEGIATAN (before/after upload) ====== -->
-      <div x-show="tab==='kegiatan'" style="display:none" class="grid lg:grid-cols-3 gap-6">
-        <!-- form -->
-        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-100 p-6">
-          <h2 class="font-bold text-slate-900">Unggah Bukti Kegiatan</h2>
-          <p class="text-xs text-slate-400 mt-0.5 mb-6">Foto before/after akan tampil di halaman transparansi publik.</p>
-          <form class="space-y-5">
-            <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Nama Kegiatan</label>
-              <input type="text" value="Betonisasi Jalan Dukuh Pagerayu" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
-            </div>
-            <div class="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Volume / Satuan</label>
-                <input type="text" placeholder="Contoh: 1,2 km × 3 m" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Lokasi (Dukuh)</label>
-                <input type="text" placeholder="Contoh: Dukuh Pagerayu" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
-              </div>
-            </div>
-            <!-- before/after upload -->
-            <div class="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Foto Sebelum</label>
-                <div class="border-2 border-dashed border-slate-200 rounded-xl aspect-[4/3] flex flex-col items-center justify-center text-center hover:border-brand-300 transition cursor-pointer relative overflow-hidden group">
-                  <img src="https://picsum.photos/seed/jalanbefore/400/300" class="absolute inset-0 w-full h-full object-cover opacity-90" alt="" />
-                  <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                    <span class="text-white text-sm font-semibold">Ganti foto</span>
-                  </div>
-                  <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-slate-900/70 text-white text-[10px] font-semibold">SEBELUM</span>
-                </div>
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Foto Sesudah</label>
-                <div class="border-2 border-dashed border-slate-200 rounded-xl aspect-[4/3] flex flex-col items-center justify-center text-center hover:border-brand-300 transition cursor-pointer relative overflow-hidden group">
-                  <img src="https://picsum.photos/seed/jalanafter/400/300" class="absolute inset-0 w-full h-full object-cover opacity-90" alt="" />
-                  <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                    <span class="text-white text-sm font-semibold">Ganti foto</span>
-                  </div>
-                  <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-brand-600/90 text-white text-[10px] font-semibold">SESUDAH</span>
-                </div>
-              </div>
-            </div>
-            <div class="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Progres Fisik (%)</label>
-                <input type="number" value="100" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm" />
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Status</label>
-                <select class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none text-sm bg-white">
-                  <option>Selesai</option><option>Berjalan</option><option>Direncanakan</option>
-                </select>
-              </div>
-            </div>
-            <div class="flex gap-3 pt-2">
-              <button type="button" class="px-5 py-2.5 rounded-lg bg-brand-700 hover:bg-brand-800 text-white text-sm font-bold shadow-lg shadow-brand-600/25 transition">Simpan & Publikasikan</button>
-              <button type="button" class="px-5 py-2.5 rounded-lg border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50 transition">Simpan Draf</button>
-            </div>
-          </form>
+      <!-- AKSI TERBIT -->
+      <div class="bg-white rounded-2xl border border-slate-100 p-6 flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+        <p class="text-xs text-slate-400">Terakhir diperbarui (data efektif): <strong class="text-slate-600" x-text="d.diperbarui"></strong>. Menyimpan akan memperbarui tanggal ini ke hari ini.</p>
+        <div class="flex flex-wrap gap-3">
+          <button @click="resetBawaan()" class="px-5 py-3 rounded-xl border border-red-200 text-red-600 font-semibold text-sm hover:bg-red-50 transition">Kembalikan ke Data Bawaan</button>
+          <button @click="simpan()" class="px-5 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm shadow-lg shadow-brand-600/25 transition">Simpan & Terbitkan</button>
         </div>
-        <!-- preview -->
-        <aside>
-          <div class="bg-white rounded-2xl border border-slate-100 p-5 sticky top-24">
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Pratinjau Publik</p>
-            <div x-data="{ pos:50 }" class="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 select-none">
-              <img src="https://picsum.photos/seed/jalanbefore/400/300" class="absolute inset-0 w-full h-full object-cover" alt="" />
-              <img src="https://picsum.photos/seed/jalanafter/400/300" class="absolute inset-0 w-full h-full object-cover" :style="`clip-path: inset(0 ${100-pos}% 0 0)`" alt="" />
-              <div class="absolute top-0 bottom-0 w-0.5 bg-white shadow pointer-events-none" :style="`left:${pos}%`"></div>
-              <input type="range" min="0" max="100" x-model.number="pos" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize" />
-            </div>
-            <p class="text-xs text-slate-400 mt-3 text-center">Geser untuk meninjau perbandingan</p>
-          </div>
-        </aside>
       </div>
     </main>
   </div>
 </div>
+
+<script>
+  function adminApbdesApp() {
+    // Data bawaan disalin PERSIS dari dataBawaan di transparansi.html (transparansiApp) — satu struktur, dua halaman.
+    const dataBawaan = {
+      '2025': {
+        pendapatan: 2840000000, belanja: 2790000000, pembiayaan: 52000000, pembiayaanKet: 'SiLPA tahun sebelumnya',
+        diperbarui: '12 Juni 2026',
+        sumber: [
+          { nama: 'Dana Desa (APBN)', nilai: 1450000000 },
+          { nama: 'Alokasi Dana Desa (ADD)', nilai: 820000000 },
+          { nama: 'Bagi Hasil Pajak/Retribusi', nilai: 290000000 },
+          { nama: 'Pendapatan Asli Desa', nilai: 180000000 },
+          { nama: 'Bantuan Provinsi', nilai: 100000000 },
+        ],
+        bidang: [
+          { nama: 'Bidang Pembangunan', anggaran: 920000000, realisasi: 875000000 },
+          { nama: 'Bidang Pemberdayaan Masyarakat', anggaran: 480000000, realisasi: 312000000 },
+          { nama: 'Penyelenggaraan Pemerintahan', anggaran: 360000000, realisasi: 270000000 },
+          { nama: 'Pembinaan Kemasyarakatan', anggaran: 110000000, realisasi: 48000000 },
+        ],
+        kegiatan: [
+          { nama: 'Betonisasi Jalan Dukuh Pagerayu', anggaran: 420000000, realisasi: 420000000 },
+          { nama: 'Rehab Saluran Irigasi Sawah', anggaran: 285000000, realisasi: 270000000 },
+          { nama: 'BLT Dana Desa (Tahap I & II)', anggaran: 288000000, realisasi: 192000000 },
+          { nama: 'Operasional Pemerintah Desa', anggaran: 360000000, realisasi: 270000000 },
+          { nama: 'Kegiatan Posyandu & Kesehatan', anggaran: 95000000, realisasi: 62000000 },
+        ],
+        bukti: [
+          { nama: 'Betonisasi Jalan Dukuh Pagerayu', meta: 'Volume 1,2 km × 3 m · TPK Swakelola · Feb–Mei 2025', status: 'Selesai', selesai: true, foto: 8, fisik: 100, anggaran: 420000000, realisasi: 420000000, catatan: '', imgSebelum: 'https://picsum.photos/seed/jalanbefore/800/500', imgSesudah: 'https://picsum.photos/seed/jalanafter/800/500' },
+          { nama: 'Rehabilitasi Saluran Irigasi Sawah', meta: 'Volume 2,0 km · TPK Swakelola · Mar–Jun 2025', status: 'Berjalan', selesai: false, foto: 5, fisik: 85, anggaran: 285000000, realisasi: 270000000, catatan: 'Catatan: dana cair 95% namun fisik baru 85% — sisa pengerjaan ditargetkan rampung Juli 2026.', imgSebelum: 'https://picsum.photos/seed/irigasibefore/800/500', imgSesudah: 'https://picsum.photos/seed/irigasiafter/800/500' },
+        ],
+        dokumen: [
+          { nama: 'Perdes APBDes 2025', ket: 'PDF · 1,2 MB', tipe: 'PDF' },
+          { nama: 'Laporan Realisasi Sem. I', ket: 'PDF · 890 KB', tipe: 'PDF' },
+          { nama: 'Rincian DD per Desa (DJPK)', ket: 'XLSX · 320 KB', tipe: 'XLSX' },
+        ],
+      },
+    };
+    const klon = o => JSON.parse(JSON.stringify(o));
+    return {
+      sidebar: false,
+      tahun: '2025',
+      d: klon(dataBawaan['2025']),
+      pakaiOverride: false, tersimpan: false,
+      init() {
+        try {
+          const ov = JSON.parse(localStorage.getItem('apbdesDesa') || 'null');
+          if (ov && ov[this.tahun]) { this.d = klon(ov[this.tahun]); this.pakaiOverride = true; }
+        } catch (e) { /* abaikan: tetap data bawaan */ }
+      },
+      get totalAnggaranBidang() { return this.d.bidang.reduce((a, b) => a + (+b.anggaran || 0), 0); },
+      get totalRealisasiBidang() { return this.d.bidang.reduce((a, b) => a + (+b.realisasi || 0), 0); },
+      rp(n) { return 'Rp ' + (+n || 0).toLocaleString('id-ID'); },
+      persen(a, b) { return b ? Math.round(a / b * 100) : 0; },
+      simpan() {
+        this.d.diperbarui = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        const obj = {}; obj[this.tahun] = this.d;
+        localStorage.setItem('apbdesDesa', JSON.stringify(obj));
+        this.pakaiOverride = true; this.tersimpan = true;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      resetBawaan() {
+        if (!confirm('Kembalikan halaman Transparansi ke data bawaan situs? Data terbitan admin di perangkat ini akan dihapus.')) return;
+        localStorage.removeItem('apbdesDesa');
+        this.d = klon(dataBawaan[this.tahun]);
+        this.pakaiOverride = false; this.tersimpan = false;
+      }
+    };
+  }
+</script>
 </body>
 </html>

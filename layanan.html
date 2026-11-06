@@ -250,21 +250,21 @@
           <div class="p-5 rounded-xl bg-slate-50 border border-slate-100">
             <div class="flex items-center justify-between mb-1">
               <p class="font-bold text-slate-900" x-text="ditemukan?.layanan"></p>
-              <span class="px-2.5 py-1 rounded-full bg-sand-100 text-sand-600 text-xs font-bold">Diterima</span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold" :class="ditemukan?.status === 'Ditolak' ? 'bg-red-100 text-red-600' : ditemukan?.status === 'Selesai' || ditemukan?.status === 'Siap Diambil' ? 'bg-brand-100 text-brand-700' : 'bg-sand-100 text-sand-600'" x-text="ditemukan?.status || 'Diterima'"></span>
             </div>
             <p class="text-xs text-slate-400" x-text="'Kode: ' + ditemukan?.kode + ' · a.n. ' + ditemukan?.nama + ' · ' + ditemukan?.tanggal"></p>
           </div>
-          <ol class="mt-6 relative border-l-2 border-slate-100 ml-2 space-y-6">
-            <li class="ml-6">
-              <span class="absolute -left-[11px] w-5 h-5 rounded-full bg-brand-600 ring-4 ring-white flex items-center justify-center"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
-              <p class="text-sm font-semibold text-slate-800">Pengajuan diterima</p>
-              <p class="text-xs text-slate-400">Tercatat di perangkat Anda</p>
-            </li>
-            <li class="ml-6">
-              <span class="absolute -left-[11px] w-5 h-5 rounded-full bg-sand-500 ring-4 ring-white animate-pulse"></span>
-              <p class="text-sm font-semibold text-slate-800">Menunggu verifikasi operator</p>
-              <p class="text-xs text-slate-400">Pastikan pengajuan sudah terkirim via WhatsApp. Status lanjutan (diproses / siap diambil) dikirim operator lewat WhatsApp ke nomor Anda.</p>
-            </li>
+          <div x-show="ditemukan?.status === 'Ditolak'" style="display:none" class="mt-4 p-4 rounded-xl bg-red-50 border border-red-100 text-sm text-red-600">Pengajuan ini ditolak operator. Hubungi operator desa lewat WhatsApp untuk mengetahui alasannya dan cara mengajukan ulang.</div>
+          <ol x-show="ditemukan?.status !== 'Ditolak'" class="mt-6 relative border-l-2 border-slate-100 ml-2 space-y-6">
+            <template x-for="(s, i) in tahapan" :key="s">
+              <li class="ml-6">
+                <span class="absolute -left-[11px] w-5 h-5 rounded-full ring-4 ring-white flex items-center justify-center" :class="i < idxStatus ? 'bg-brand-600' : i === idxStatus ? 'bg-sand-500 animate-pulse' : 'bg-slate-200'">
+                  <svg x-show="i < idxStatus" class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <p class="text-sm font-semibold" :class="i <= idxStatus ? 'text-slate-800' : 'text-slate-400'" x-text="s"></p>
+                <p class="text-xs text-slate-400" x-text="i < idxStatus ? 'Selesai' : i === idxStatus ? 'Tahap saat ini — diperbarui operator lewat panel admin / WhatsApp' : 'Menunggu'"></p>
+              </li>
+            </template>
           </ol>
         </div>
         <p x-show="hasilCek === 'kosong'" style="display:none" class="mt-6 text-sm text-slate-500 bg-sand-50 border border-sand-100 rounded-xl p-4">Kode tidak ditemukan di perangkat ini. Pengajuan hanya tersimpan di perangkat yang dipakai saat mendaftar. Jika Anda mendaftar dari perangkat lain, tanyakan statusnya ke operator desa lewat WhatsApp dengan menyebut nama & jenis surat.</p>
@@ -338,6 +338,8 @@
         pilihan: null, centang: [], sukses: null,
         f: { nama:'', nik:'', alamat:'', wa:'', perlu:'', detail:'', setuju:false },
         kodeCek: '', hasilCek: '', ditemukan: null,
+        tahapan: ['Diterima', 'Diverifikasi', 'Diproses', 'Siap Diambil', 'Selesai'],
+        get idxStatus() { const i = this.tahapan.indexOf(this.ditemukan?.status || 'Diterima'); return i < 0 ? 0 : i; },
         get tersaring() {
           const q = this.cari.toLowerCase();
           return this.layananData.filter(l => (this.kat==='Semua' || l.kat===this.kat) && (l.nama+' '+l.desc).toLowerCase().includes(q));
@@ -346,7 +348,7 @@
         kirim() {
           const kode = 'JTR-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
           const semua = JSON.parse(localStorage.getItem('pengajuanDesa') || '[]');
-          const rec = { kode, layanan: this.pilihan.nama, nama: this.f.nama, tanggal: new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' }) };
+          const rec = { kode, layanan: this.pilihan.nama, nama: this.f.nama, wa: this.f.wa, perlu: this.f.perlu, detail: this.f.detail, status: 'Diterima', tanggal: new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' }) };
           semua.push(rec); localStorage.setItem('pengajuanDesa', JSON.stringify(semua));
           const teks = ['Halo Operator Desa Jatirokeh, saya mengajukan surat online:', '', 'Jenis: ' + this.pilihan.nama, 'Kode: ' + kode, 'Nama: ' + this.f.nama, 'NIK: ' + this.f.nik, 'Alamat: ' + this.f.alamat, 'Keperluan: ' + this.f.perlu, this.f.detail ? (this.pilihan.detail + ': ' + this.f.detail) : '', '', 'Foto dokumen syarat saya lampirkan menyusul di chat ini. Terima kasih.'].filter(Boolean).join('\n');
           this.sukses = { kode, wa: 'https://wa.me/' + WA_OPERATOR + '?text=' + encodeURIComponent(teks) };
